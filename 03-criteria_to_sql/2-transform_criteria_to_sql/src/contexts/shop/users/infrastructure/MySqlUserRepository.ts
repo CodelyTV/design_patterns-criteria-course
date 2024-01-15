@@ -1,4 +1,5 @@
 import { Criteria } from "../../../shared/domain/criteria/Criteria";
+import { CriteriaToSqlConverter } from "../../../shared/infrastructure/criteria/CriteriaToSqlConverter";
 import { MariaDBConnection } from "../../../shared/infrastructure/MariaDBConnection";
 import { User } from "../domain/User";
 import { UserId } from "../domain/UserId";
@@ -46,9 +47,20 @@ export class MySqlUserRepository implements UserRepository {
 		});
 	}
 
-	async matching(_criteria: Criteria): Promise<User[]> {
-		await this.connection.execute("");
+	async matching(criteria: Criteria): Promise<User[]> {
+		const converter = new CriteriaToSqlConverter();
 
-		throw new Error("Method not implemented.");
+		const result = await this.connection.searchAll<DatabaseUser>(
+			converter.convert(["id", "name", "email", "profile_picture"], "shop__users", criteria),
+		);
+
+		return result.map((user) =>
+			User.fromPrimitives({
+				id: user.id,
+				name: user.name,
+				email: user.email,
+				profilePicture: user.profile_picture,
+			}),
+		);
 	}
 }
