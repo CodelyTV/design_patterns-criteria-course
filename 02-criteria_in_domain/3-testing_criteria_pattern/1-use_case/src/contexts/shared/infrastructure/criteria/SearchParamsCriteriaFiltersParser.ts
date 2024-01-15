@@ -1,4 +1,4 @@
-import { FiltersPrimitives } from "@/contexts/shared/domain/criteria/Filter";
+import { FiltersPrimitives } from "../../domain/criteria/Filter";
 
 export class SearchParamsCriteriaFiltersParser {
 	static parse(searchParams: URLSearchParams): FiltersPrimitives[] {

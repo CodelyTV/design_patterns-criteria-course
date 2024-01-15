@@ -14,6 +14,7 @@ export function GET(request: NextRequest): NextResponse {
 		searchParams.get("order"),
 	);
 
+	// eslint-disable-next-line no-console
 	console.log(criteria);
 
 	return NextResponse.json({

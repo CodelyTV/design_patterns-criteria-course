@@ -1,5 +1,4 @@
-import { FiltersPrimitives } from "@/contexts/shared/domain/criteria/Filter";
-
+import { FiltersPrimitives } from "./Filter";
 import { Filters } from "./Filters";
 import { Order } from "./Order";
 
