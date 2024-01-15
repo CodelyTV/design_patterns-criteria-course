@@ -1,5 +1,8 @@
 ### Filtering by one field
 GET http://localhost:3000/api/users?filters[0][field]=name&filters[0][operator]=eq&filters[0][value]=rafa
 
-### Filtering by two fileds
-GET http://localhost:3000/api/users?filters[0][field]=name&filters[0][operator]=eq&filters[0][value]=rafa&filters[1][field]=surname&filters[1][operator]=eq&filters[1][value]=gomez
+### Filtering by one field sorted
+GET http://localhost:3000/api/users?filters[0][field]=name&filters[0][operator]=eq&filters[0][value]=rafa&orderBy=name&order=asc
+
+### Filtering by two fileds sorted
+GET http://localhost:3000/api/users?filters[0][field]=name&filters[0][operator]=eq&filters[0][value]=rafa&filters[1][field]=surname&filters[1][operator]=eq&filters[1][value]=gomez&orderBy=name&order=asc
