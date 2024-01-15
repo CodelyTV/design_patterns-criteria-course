@@ -5,7 +5,11 @@ export function GET(request: NextRequest): NextResponse {
 
 	const filters = parseFilters(searchParams);
 
-	return NextResponse.json(filters);
+	return NextResponse.json({
+		filters,
+		orderBy: searchParams.get("orderBy"),
+		order: searchParams.get("order"),
+	});
 }
 
 interface Filter {
