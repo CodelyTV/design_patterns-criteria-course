@@ -5,9 +5,13 @@ export class CriteriaToSqlConverter {
 		let query = `SELECT ${fieldsToSelect.join(", ")} FROM ${tableName}`;
 
 		if (criteria.hasFilters()) {
-			query = query.concat(
-				` WHERE ${criteria.filters.value[0].field.value} ${criteria.filters.value[0].operator.value} '${criteria.filters.value[0].value.value}'`,
-			);
+			query = query.concat(" WHERE ");
+
+			const whereQuery = criteria.filters.value.map((filter) => {
+				return `${filter.field.value} ${filter.operator.value} '${filter.value.value}'`;
+			});
+
+			query = query.concat(whereQuery.join(" AND "));
 		}
 
 		if (criteria.hasOrder()) {

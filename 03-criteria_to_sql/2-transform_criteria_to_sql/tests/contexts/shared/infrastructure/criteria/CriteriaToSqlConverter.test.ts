@@ -39,4 +39,31 @@ describe("CriteriaToSqlConverter should", () => {
 
 		expect(actualQuery).toBe("SELECT id, name FROM users WHERE name = 'Javier' ORDER BY id DESC;");
 	});
+
+	it("Generate select with multiples filters", async () => {
+		const actualQuery = converter.convert(
+			["id", "name", "email"],
+			"users",
+			CriteriaMother.create({
+				filters: [
+					{
+						field: "name",
+						operator: "EQUAL",
+						value: "Javier",
+					},
+					{
+						field: "email",
+						operator: "EQUAL",
+						value: "javier@terra.es",
+					},
+				],
+				orderBy: null,
+				orderType: null,
+			}),
+		);
+
+		expect(actualQuery).toBe(
+			"SELECT id, name, email FROM users WHERE name = 'Javier' AND email = 'javier@terra.es';",
+		);
+	});
 });
