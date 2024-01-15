@@ -27,7 +27,7 @@ export class Filter {
 		);
 	}
 
-	toPrimitives() {
+	toPrimitives(): FiltersPrimitives {
 		return {
 			field: this.field.value,
 			operator: this.operator.value,
