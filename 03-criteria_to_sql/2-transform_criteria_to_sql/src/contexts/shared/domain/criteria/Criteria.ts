@@ -23,7 +23,7 @@ export class Criteria {
 		return !this.order.isNone();
 	}
 
-	hasFilters() {
+	hasFilters(): boolean {
 		return !this.filters.isEmpty();
 	}
 }
