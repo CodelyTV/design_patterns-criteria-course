@@ -29,4 +29,14 @@ describe("CriteriaToSqlConverter should", () => {
 
 		expect(actualQuery).toBe("SELECT id, name FROM users WHERE name = 'Javier';");
 	});
+
+	it("Generate select with one filter sorted", async () => {
+		const actualQuery = converter.convert(
+			["id", "name"],
+			"users",
+			CriteriaMother.withOneFilterSorted("name", "EQUAL", "Javier", "id", "DESC"),
+		);
+
+		expect(actualQuery).toBe("SELECT id, name FROM users WHERE name = 'Javier' ORDER BY id DESC;");
+	});
 });

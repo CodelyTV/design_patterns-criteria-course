@@ -43,4 +43,24 @@ export class CriteriaMother {
 			null,
 		);
 	}
+
+	static withOneFilterSorted(
+		field: string,
+		operator: string,
+		value: string,
+		orderBy: string,
+		orderType: string,
+	) {
+		return Criteria.fromPrimitives(
+			[
+				{
+					field,
+					operator,
+					value,
+				},
+			],
+			orderBy,
+			orderType,
+		);
+	}
 }
