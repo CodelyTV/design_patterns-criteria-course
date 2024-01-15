@@ -22,7 +22,7 @@ export class Filter {
 	static fromPrimitives(field: string, operator: string, value: string): Filter {
 		return new Filter(
 			new FilterField(field),
-			new FilterOperator(operator as Operator),
+			new FilterOperator(Operator[operator as keyof typeof Operator]),
 			new FilterValue(value),
 		);
 	}

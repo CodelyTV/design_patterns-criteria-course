@@ -12,4 +12,8 @@ export class Filters {
 	toPrimitives(): FiltersPrimitives[] {
 		return this.value.map((filter) => filter.toPrimitives());
 	}
+
+	isEmpty(): boolean {
+		return this.value.length === 0;
+	}
 }

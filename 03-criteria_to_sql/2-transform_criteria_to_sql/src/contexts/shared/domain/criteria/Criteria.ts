@@ -22,4 +22,8 @@ export class Criteria {
 	hasOrder(): boolean {
 		return !this.order.isNone();
 	}
+
+	hasFilters() {
+		return !this.filters.isEmpty();
+	}
 }

@@ -29,4 +29,18 @@ export class CriteriaMother {
 	static emptySorted(orderBy: string, orderType: string): Criteria {
 		return Criteria.fromPrimitives([], orderBy, orderType);
 	}
+
+	static withOneFilter(field: string, operator: string, value: string) {
+		return Criteria.fromPrimitives(
+			[
+				{
+					field,
+					operator,
+					value,
+				},
+			],
+			null,
+			null,
+		);
+	}
 }
