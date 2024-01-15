@@ -25,4 +25,8 @@ export class CriteriaMother {
 	static empty(): Criteria {
 		return Criteria.fromPrimitives([], null, null);
 	}
+
+	static emptySorted(orderBy: string, orderType: string): Criteria {
+		return Criteria.fromPrimitives([], orderBy, orderType);
+	}
 }

@@ -9,4 +9,14 @@ describe("CriteriaToSqlConverter should", () => {
 
 		expect(actualQuery).toBe("SELECT id, name FROM users;");
 	});
+
+	it("Generate select with order", async () => {
+		const actualQuery = converter.convert(
+			["id", "name"],
+			"users",
+			CriteriaMother.emptySorted("id", "DESC"),
+		);
+
+		expect(actualQuery).toBe("SELECT id, name FROM users ORDER BY id DESC;");
+	});
 });

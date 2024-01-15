@@ -16,4 +16,8 @@ export class Order {
 			? new Order(new OrderBy(orderBy), new OrderType(orderType as OrderTypes))
 			: Order.none();
 	}
+
+	isNone(): boolean {
+		return this.orderType.isNone();
+	}
 }
