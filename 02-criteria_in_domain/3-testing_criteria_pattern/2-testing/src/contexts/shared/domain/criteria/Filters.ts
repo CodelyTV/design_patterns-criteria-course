@@ -8,4 +8,8 @@ export class Filters {
 			filters.map((filter) => Filter.fromPrimitives(filter.field, filter.operator, filter.value)),
 		);
 	}
+
+	toPrimitives(): FiltersPrimitives[] {
+		return this.value.map((filter) => filter.toPrimitives());
+	}
 }
