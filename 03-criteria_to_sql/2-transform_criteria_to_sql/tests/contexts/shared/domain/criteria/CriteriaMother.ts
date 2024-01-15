@@ -21,4 +21,8 @@ export class CriteriaMother {
 
 		return Criteria.fromPrimitives(primitives.filters, primitives.orderBy, primitives.orderType);
 	}
+
+	static empty(): Criteria {
+		return Criteria.fromPrimitives([], null, null);
+	}
 }
