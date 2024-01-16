@@ -4,13 +4,13 @@ import { CriteriaMother } from "../../domain/criteria/CriteriaMother";
 describe("CriteriaToSqlConverter should", () => {
 	const converter = new CriteriaToSqlConverter();
 
-	it("Generate simple select with an empty criteria", async () => {
+	it("Generate simple select with an empty criteria", () => {
 		const actualQuery = converter.convert(["id", "name"], "users", CriteriaMother.empty());
 
 		expect(actualQuery).toBe("SELECT id, name FROM users;");
 	});
 
-	it("Generate select with order", async () => {
+	it("Generate select with order", () => {
 		const actualQuery = converter.convert(
 			["id", "name"],
 			"users",
@@ -20,7 +20,7 @@ describe("CriteriaToSqlConverter should", () => {
 		expect(actualQuery).toBe("SELECT id, name FROM users ORDER BY id DESC;");
 	});
 
-	it("Generate select with one filter", async () => {
+	it("Generate select with one filter", () => {
 		const actualQuery = converter.convert(
 			["id", "name"],
 			"users",
@@ -30,7 +30,7 @@ describe("CriteriaToSqlConverter should", () => {
 		expect(actualQuery).toBe("SELECT id, name FROM users WHERE name = 'Javier';");
 	});
 
-	it("Generate select with one filter sorted", async () => {
+	it("Generate select with one filter sorted", () => {
 		const actualQuery = converter.convert(
 			["id", "name"],
 			"users",
@@ -40,7 +40,7 @@ describe("CriteriaToSqlConverter should", () => {
 		expect(actualQuery).toBe("SELECT id, name FROM users WHERE name = 'Javier' ORDER BY id DESC;");
 	});
 
-	it("Generate select with multiples filters", async () => {
+	it("Generate select with multiples filters", () => {
 		const actualQuery = converter.convert(
 			["id", "name", "email"],
 			"users",
@@ -67,7 +67,7 @@ describe("CriteriaToSqlConverter should", () => {
 		);
 	});
 
-	it("Generate select with multiples filters and sort", async () => {
+	it("Generate select with multiples filters and sort", () => {
 		const actualQuery = converter.convert(
 			["id", "name", "email"],
 			"users",
