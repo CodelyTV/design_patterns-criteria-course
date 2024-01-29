@@ -9,4 +9,12 @@ export enum Operator {
 
 export class FilterOperator {
 	constructor(public readonly value: Operator) {}
+
+	isContains(): boolean {
+		return this.value.valueOf() === Operator.CONTAINS.valueOf();
+	}
+
+	isNotContains(): boolean {
+		return this.value.valueOf() === Operator.NOT_CONTAINS.valueOf();
+	}
 }
