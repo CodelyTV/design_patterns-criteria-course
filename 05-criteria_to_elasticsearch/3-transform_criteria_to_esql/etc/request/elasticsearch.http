@@ -1,0 +1,36 @@
+# Get all users
+GET localhost:9200/users/_search?size=1000
+Content-Type: application/json
+
+{
+  "query": {"bool":{}}
+}
+
+###
+# Get all users named Javi
+GET localhost:9200/users/_search?size=1000
+Content-Type: application/json
+
+{
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "match": {
+            "name":"Javi"
+          }
+        }
+      ]
+    }
+  }
+}
+
+###
+
+# Use new esql
+POST localhost:9200/_query?format=txt
+Content-Type: application/json
+
+{
+  "query": "FROM users | WHERE name LIKE \"*Javi*\""
+}
