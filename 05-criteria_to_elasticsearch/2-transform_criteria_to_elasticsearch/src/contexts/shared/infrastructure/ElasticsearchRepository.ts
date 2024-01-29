@@ -1,10 +1,17 @@
 import { Client } from "@elastic/elasticsearch";
 import { ResponseError } from "@elastic/transport/lib/errors";
 
+import { Criteria } from "../domain/criteria/Criteria";
+import { CriteriaToElasticsearchConverter } from "./criteria/CriteriaToElasticsearchConverter";
+
 export abstract class ElasticsearchRepository<T> {
-	private readonly client = new Client({ node: "http://localhost:9200" });
+	private readonly converter = new CriteriaToElasticsearchConverter();
+
+	constructor(private readonly client: Client) {}
 
 	protected abstract indexName(): string;
+
+	protected abstract fromPrimitives(primitives: object): T;
 
 	protected async index(id: string, document: object): Promise<void> {
 		await this.client.index({
@@ -15,18 +22,18 @@ export abstract class ElasticsearchRepository<T> {
 		});
 	}
 
-	protected async get(id: string, fromPrimitives: (primitives: object) => T): Promise<T | null> {
+	protected async get(id: string): Promise<T | null> {
 		try {
-			const result = await this.client.get({
+			const entity = await this.client.get({
 				index: this.indexName(),
 				id,
 			});
 
-			if (!result.found) {
+			if (!entity.found) {
 				return null;
 			}
 
-			return fromPrimitives(result._source as object);
+			return this.fromPrimitives(entity._source as object);
 		} catch (error: unknown) {
 			if (error instanceof ResponseError && error.meta.statusCode === 404) {
 				return null;
@@ -34,5 +41,13 @@ export abstract class ElasticsearchRepository<T> {
 
 			throw error;
 		}
+	}
+
+	protected async getMatching(criteria: Criteria): Promise<T[]> {
+		const query = this.converter.convert(this.indexName(), criteria);
+
+		const response = await this.client.search(query);
+
+		return response.hits.hits.map((hit) => this.fromPrimitives(hit._source as object));
 	}
 }

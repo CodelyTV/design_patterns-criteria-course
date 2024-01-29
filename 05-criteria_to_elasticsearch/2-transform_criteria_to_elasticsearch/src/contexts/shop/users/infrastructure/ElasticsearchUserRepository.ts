@@ -15,16 +15,18 @@ export class ElasticsearchUserRepository
 	}
 
 	async search(id: UserId): Promise<User | null> {
-		return this.get(id.value, (primitives: object) =>
-			User.fromPrimitives(primitives as UserPrimitives),
-		);
+		return this.get(id.value);
 	}
 
-	async matching(_criteria: Criteria): Promise<User[]> {
-		throw new Error("Method not implemented.");
+	async matching(criteria: Criteria): Promise<User[]> {
+		return this.getMatching(criteria);
 	}
 
 	protected indexName(): string {
 		return "users";
+	}
+
+	protected fromPrimitives(primitives: object): User {
+		return User.fromPrimitives(primitives as UserPrimitives);
 	}
 }
