@@ -93,4 +93,14 @@ describe("CriteriaToSqlConverter should", () => {
 			"SELECT id, name, email FROM users WHERE name = 'Javier' AND email = 'javier@terra.es' ORDER BY id DESC;",
 		);
 	});
+
+	it("Generate simple select paginated", () => {
+		const actualQuery = converter.convert(
+			["id", "name"],
+			"users",
+			CriteriaMother.emptyPaginated(10, 3),
+		);
+
+		expect(actualQuery).toBe("SELECT id, name FROM users LIMIT 10 OFFSET 3;");
+	});
 });

@@ -6,12 +6,20 @@ interface MinimalConn {
 }
 
 export class MariaDBConnection {
-	private readonly pool: Pool = createPool({
-		host: "localhost",
-		user: "codely",
-		password: "c0d3ly7v",
-		database: "ecommerce",
-	});
+	private poolInstance: Pool | null = null;
+
+	private get pool(): Pool {
+		if (!this.poolInstance) {
+			this.poolInstance = createPool({
+				host: "localhost",
+				user: "codely",
+				password: "c0d3ly7v",
+				database: "ecommerce",
+			});
+		}
+
+		return this.poolInstance;
+	}
 
 	async searchOne<T>(query: string): Promise<T | null> {
 		let conn: MinimalConn | null = null;
@@ -54,5 +62,11 @@ export class MariaDBConnection {
 
 	async truncate(users: string): Promise<void> {
 		await this.execute(`TRUNCATE TABLE ${users}`);
+	}
+
+	async close(): Promise<void> {
+		if (this.poolInstance !== null) {
+			await this.pool.end();
+		}
 	}
 }

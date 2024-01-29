@@ -6,3 +6,6 @@ GET http://localhost:3000/api/users?filters[0][field]=name&filters[0][operator]=
 
 ### Filtering by two fileds sorted
 GET http://localhost:3000/api/users?filters[0][field]=name&filters[0][operator]=EQUAL&filters[0][value]=rafa&filters[1][field]=surname&filters[1][operator]=EQUAL&filters[1][value]=gomez&orderBy=name&order=ASC
+
+### Filtering by one field papginating
+GET http://localhost:3000/api/users?filters[0][field]=name&filters[0][operator]=EQUAL&filters[0][value]=Javi&limit=10&offset=0

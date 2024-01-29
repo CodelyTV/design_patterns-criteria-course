@@ -20,6 +20,14 @@ export class CriteriaToSqlConverter {
 			);
 		}
 
+		if (criteria.hasLimit()) {
+			query = query.concat(` LIMIT ${criteria.limit}`);
+		}
+
+		if (criteria.hasOffset()) {
+			query = query.concat(` OFFSET ${criteria.offset}`);
+		}
+
 		return `${query};`;
 	}
 }

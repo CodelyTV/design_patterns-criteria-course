@@ -1,3 +1,5 @@
+import { faker } from "@faker-js/faker";
+
 import { Criteria } from "../../../../../src/contexts/shared/domain/criteria/Criteria";
 import { FiltersPrimitives } from "../../../../../src/contexts/shared/domain/criteria/Filter";
 import { FiltersMother } from "./FiltersMother";
@@ -7,6 +9,8 @@ type CriteriaPrimitives = {
 	filters: FiltersPrimitives[];
 	orderBy: string | null;
 	orderType: string | null;
+	limit: number | null;
+	offset: number | null;
 };
 
 export class CriteriaMother {
@@ -16,21 +20,33 @@ export class CriteriaMother {
 			filters: FiltersMother.create().toPrimitives(),
 			orderBy: defaultOrder.orderBy.value,
 			orderType: defaultOrder.orderType.value,
+			limit: faker.number.int({ min: 1, max: 100 }),
+			offset: faker.number.int({ min: 1, max: 100 }),
 			...params,
 		};
 
-		return Criteria.fromPrimitives(primitives.filters, primitives.orderBy, primitives.orderType);
+		return Criteria.fromPrimitives(
+			primitives.filters,
+			primitives.orderBy,
+			primitives.orderType,
+			primitives.limit,
+			primitives.offset,
+		);
 	}
 
 	static empty(): Criteria {
-		return Criteria.fromPrimitives([], null, null);
+		return Criteria.fromPrimitives([], null, null, null, null);
 	}
 
 	static emptySorted(orderBy: string, orderType: string): Criteria {
-		return Criteria.fromPrimitives([], orderBy, orderType);
+		return Criteria.fromPrimitives([], orderBy, orderType, null, null);
 	}
 
-	static withOneFilter(field: string, operator: string, value: string) {
+	static emptyPaginated(limit: number, offset: number): Criteria {
+		return Criteria.fromPrimitives([], null, null, limit, offset);
+	}
+
+	static withOneFilter(field: string, operator: string, value: string): Criteria {
 		return Criteria.fromPrimitives(
 			[
 				{
@@ -39,6 +55,8 @@ export class CriteriaMother {
 					value,
 				},
 			],
+			null,
+			null,
 			null,
 			null,
 		);
@@ -50,7 +68,7 @@ export class CriteriaMother {
 		value: string,
 		orderBy: string,
 		orderType: string,
-	) {
+	): Criteria {
 		return Criteria.fromPrimitives(
 			[
 				{
@@ -61,6 +79,8 @@ export class CriteriaMother {
 			],
 			orderBy,
 			orderType,
+			null,
+			null,
 		);
 	}
 }
