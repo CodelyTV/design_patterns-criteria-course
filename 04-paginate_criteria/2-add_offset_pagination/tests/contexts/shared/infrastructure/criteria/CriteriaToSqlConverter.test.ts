@@ -59,8 +59,8 @@ describe("CriteriaToSqlConverter should", () => {
 				],
 				orderBy: null,
 				orderType: null,
-				limit: null,
-				offset: null,
+				pageSize: null,
+				pageNumber: null,
 			}),
 		);
 
@@ -88,8 +88,8 @@ describe("CriteriaToSqlConverter should", () => {
 				],
 				orderBy: "id",
 				orderType: "DESC",
-				limit: null,
-				offset: null,
+				pageSize: null,
+				pageNumber: null,
 			}),
 		);
 
@@ -125,6 +125,6 @@ describe("CriteriaToSqlConverter should", () => {
 			CriteriaMother.emptyPaginated(10, 3),
 		);
 
-		expect(actualQuery).toBe("SELECT id, name FROM users LIMIT 10 OFFSET 3;");
+		expect(actualQuery).toBe("SELECT id, name FROM users LIMIT 10 OFFSET 20;");
 	});
 });

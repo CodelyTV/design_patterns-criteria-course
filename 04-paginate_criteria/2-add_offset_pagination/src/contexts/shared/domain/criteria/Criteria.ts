@@ -6,22 +6,26 @@ export class Criteria {
 	constructor(
 		public readonly filters: Filters,
 		public readonly order: Order,
-		public readonly limit: number | null,
-		public readonly offset: number | null,
-	) {}
+		public readonly pageSize: number | null,
+		public readonly pageNumber: number | null,
+	) {
+		if (pageNumber !== null && pageSize === null) {
+			throw new Error("Page size is required when page number is defined");
+		}
+	}
 
 	static fromPrimitives(
 		filters: FiltersPrimitives[],
 		orderBy: string | null,
 		orderType: string | null,
-		limit: number | null,
-		offset: number | null,
+		pageSize: number | null,
+		pageNumber: number | null,
 	): Criteria {
 		return new Criteria(
 			Filters.fromPrimitives(filters),
 			Order.fromPrimitives(orderBy, orderType),
-			limit,
-			offset,
+			pageSize,
+			pageNumber,
 		);
 	}
 
@@ -31,13 +35,5 @@ export class Criteria {
 
 	hasFilters(): boolean {
 		return !this.filters.isEmpty();
-	}
-
-	hasLimit(): boolean {
-		return this.limit !== null;
-	}
-
-	hasOffset(): boolean {
-		return this.offset !== null;
 	}
 }

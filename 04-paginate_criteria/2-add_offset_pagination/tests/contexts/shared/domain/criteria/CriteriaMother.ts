@@ -9,8 +9,8 @@ type CriteriaPrimitives = {
 	filters: FiltersPrimitives[];
 	orderBy: string | null;
 	orderType: string | null;
-	limit: number | null;
-	offset: number | null;
+	pageSize: number | null;
+	pageNumber: number | null;
 };
 
 export class CriteriaMother {
@@ -20,8 +20,8 @@ export class CriteriaMother {
 			filters: FiltersMother.create().toPrimitives(),
 			orderBy: defaultOrder.orderBy.value,
 			orderType: defaultOrder.orderType.value,
-			limit: faker.number.int({ min: 1, max: 100 }),
-			offset: faker.number.int({ min: 1, max: 100 }),
+			pageSize: faker.number.int({ min: 1, max: 100 }),
+			pageNumber: faker.number.int({ min: 1, max: 100 }),
 			...params,
 		};
 
@@ -29,8 +29,8 @@ export class CriteriaMother {
 			primitives.filters,
 			primitives.orderBy,
 			primitives.orderType,
-			primitives.limit,
-			primitives.offset,
+			primitives.pageSize,
+			primitives.pageNumber,
 		);
 	}
 
@@ -42,8 +42,8 @@ export class CriteriaMother {
 		return Criteria.fromPrimitives([], orderBy, orderType, null, null);
 	}
 
-	static emptyPaginated(limit: number, offset: number): Criteria {
-		return Criteria.fromPrimitives([], null, null, limit, offset);
+	static emptyPaginated(pageSize: number, pageNumber: number): Criteria {
+		return Criteria.fromPrimitives([], null, null, pageSize, pageNumber);
 	}
 
 	static withOneFilter(field: string, operator: string, value: string): Criteria {

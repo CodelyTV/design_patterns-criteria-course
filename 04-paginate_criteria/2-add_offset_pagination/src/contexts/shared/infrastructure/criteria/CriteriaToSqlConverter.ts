@@ -19,12 +19,12 @@ export class CriteriaToSqlConverter {
 			);
 		}
 
-		if (criteria.hasLimit()) {
-			query = query.concat(` LIMIT ${criteria.limit}`);
+		if (criteria.pageSize !== null) {
+			query = query.concat(` LIMIT ${criteria.pageSize}`);
 		}
 
-		if (criteria.hasOffset()) {
-			query = query.concat(` OFFSET ${criteria.offset}`);
+		if (criteria.pageSize !== null && criteria.pageNumber !== null) {
+			query = query.concat(` OFFSET ${criteria.pageSize * (criteria.pageNumber - 1)}`);
 		}
 
 		return `${query};`;
