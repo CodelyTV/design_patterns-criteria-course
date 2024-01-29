@@ -47,6 +47,18 @@ export class MySqlUserRepository implements UserRepository {
 		});
 	}
 
+	async count(): Promise<number> {
+		const query = `SELECT count(*) as count FROM shop__users;`;
+
+		const result = (await this.connection.searchOne<{ count: bigint }>(query)) ?? {
+			count: BigInt(0),
+		};
+
+		console.log(result);
+
+		return Number(result.count);
+	}
+
 	async matching(criteria: Criteria): Promise<User[]> {
 		const converter = new CriteriaToSqlConverter();
 
