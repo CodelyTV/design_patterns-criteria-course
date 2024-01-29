@@ -7,18 +7,18 @@ import { MySqlUserRepository } from "../../../contexts/shop/users/infrastructure
 
 const searcher = new UsersByCriteriaSearcher(new MySqlUserRepository(new MariaDBConnection()));
 
-export function GET(request: NextRequest): NextResponse {
+export async function GET(request: NextRequest): Promise<NextResponse> {
 	const { searchParams } = new URL(request.url);
 
 	const filters = SearchParamsCriteriaFiltersParser.parse(searchParams);
 
-	const users = searcher.search(
+	const users = await searcher.search(
 		filters,
 		searchParams.get("orderBy"),
 		searchParams.get("order"),
-		searchParams.has("limit") ? parseInt(searchParams.get("limit") as string, 10) : null,
-		searchParams.has("offset") ? parseInt(searchParams.get("offset") as string, 10) : null,
+		searchParams.has("pageSize") ? parseInt(searchParams.get("pageSize") as string, 10) : null,
+		searchParams.has("pageNumber") ? parseInt(searchParams.get("pageNumber") as string, 10) : null,
 	);
 
-	return NextResponse.json(users);
+	return NextResponse.json(users.map((user) => user.toPrimitives()));
 }
