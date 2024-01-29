@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@elastic/elasticsearch": "^8.11.0",
     "mariadb": "^3.2.3",
     "next": "14.0.4",
     "react": "^18",
