@@ -1,6 +1,6 @@
 version: '3'
 services:
-  1-prepare_elastic-mysql:
+  2-add_joins-mysql:
     image: mariadb:11
     restart: always
     environment:
@@ -15,7 +15,7 @@ services:
       - db_data:/var/lib/mysql
       - ./databases/ecommerce.sql:/docker-entrypoint-initdb.d/init.sql
 
-  elasticsearch:
+  2-add_joins-elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:8.12.0
     environment:
       discovery.type: single-node

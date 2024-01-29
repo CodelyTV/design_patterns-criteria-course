@@ -8,7 +8,12 @@ describe("MySqlUserRepository should", () => {
 	const connection = new MariaDBConnection();
 	const repository = new MySqlUserRepository(connection);
 
-	beforeEach(async () => await connection.truncate("shop__users"));
+	beforeEach(async () => {
+		await connection.disableForeignKeysCheck();
+		await connection.truncate("shop__users");
+		await connection.truncate("shop__users_data");
+		await connection.enableForeignKeysCheck();
+	});
 	afterAll(async () => await connection.close());
 
 	it("save a user", async () => {

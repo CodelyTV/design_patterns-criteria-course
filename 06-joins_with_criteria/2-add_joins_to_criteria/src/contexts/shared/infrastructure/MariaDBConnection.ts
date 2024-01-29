@@ -64,6 +64,14 @@ export class MariaDBConnection {
 		await this.execute(`TRUNCATE TABLE ${users}`);
 	}
 
+	async enableForeignKeysCheck(): Promise<void> {
+		await this.execute("SET FOREIGN_KEY_CHECKS=1;");
+	}
+
+	async disableForeignKeysCheck(): Promise<void> {
+		await this.execute("SET FOREIGN_KEY_CHECKS=0;");
+	}
+
 	async close(): Promise<void> {
 		if (this.poolInstance !== null) {
 			await this.pool.end();
