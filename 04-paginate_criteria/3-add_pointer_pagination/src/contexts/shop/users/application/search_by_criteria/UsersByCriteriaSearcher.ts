@@ -11,9 +11,9 @@ export class UsersByCriteriaSearcher {
 		orderBy: string | null,
 		orderType: string | null,
 		pageSize: number | null,
-		pageNumber: number | null,
+		cursor: string | null,
 	): Promise<User[]> {
-		const criteria = Criteria.fromPrimitives(filters, orderBy, orderType, pageSize, pageNumber);
+		const criteria = Criteria.fromPrimitives(filters, orderBy, orderType, pageSize, cursor);
 
 		return this.repository.matching(criteria);
 	}

@@ -17,8 +17,11 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
 		searchParams.get("orderBy"),
 		searchParams.get("order"),
 		searchParams.has("pageSize") ? parseInt(searchParams.get("pageSize") as string, 10) : null,
-		searchParams.has("pageNumber") ? parseInt(searchParams.get("pageNumber") as string, 10) : null,
+		searchParams.has("cursor") ? (searchParams.get("cursor") as string) : null,
 	);
 
-	return NextResponse.json(users.map((user) => user.toPrimitives()));
+	return NextResponse.json({
+		users: users.map((user) => user.toPrimitives()),
+		nextCursor: users,
+	});
 }

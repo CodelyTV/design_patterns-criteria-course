@@ -7,10 +7,14 @@ export class Criteria {
 		public readonly filters: Filters,
 		public readonly order: Order,
 		public readonly pageSize: number | null,
-		public readonly pageNumber: number | null,
+		public readonly cursor: string | null,
 	) {
-		if (pageNumber !== null && pageSize === null) {
+		if (cursor !== null && pageSize === null) {
 			throw new Error("Page size is required when page number is defined");
+		}
+
+		if (cursor !== null && order.isNone()) {
+			throw new Error("Order is required when cursor is defined");
 		}
 	}
 
@@ -19,13 +23,13 @@ export class Criteria {
 		orderBy: string | null,
 		orderType: string | null,
 		pageSize: number | null,
-		pageNumber: number | null,
+		cursor: string | null,
 	): Criteria {
 		return new Criteria(
 			Filters.fromPrimitives(filters),
 			Order.fromPrimitives(orderBy, orderType),
 			pageSize,
-			pageNumber,
+			cursor,
 		);
 	}
 

@@ -19,7 +19,7 @@ describe("UsersByCriteriaSearcher should", () => {
 				criteria.order.orderBy.value,
 				criteria.order.orderType.value,
 				criteria.pageSize,
-				criteria.pageNumber,
+				criteria.cursor,
 			),
 		).toStrictEqual(expectedUsers);
 	});

@@ -60,7 +60,7 @@ describe("CriteriaToSqlConverter should", () => {
 				orderBy: null,
 				orderType: null,
 				pageSize: null,
-				pageNumber: null,
+				cursor: null,
 			}),
 		);
 
@@ -89,7 +89,7 @@ describe("CriteriaToSqlConverter should", () => {
 				orderBy: "id",
 				orderType: "DESC",
 				pageSize: null,
-				pageNumber: null,
+				cursor: null,
 			}),
 		);
 
@@ -122,9 +122,11 @@ describe("CriteriaToSqlConverter should", () => {
 		const actualQuery = converter.convert(
 			["id", "name"],
 			"users",
-			CriteriaMother.emptyPaginated(10, 3),
+			CriteriaMother.emptyPaginated("created_at", "DESC", 10, "1706548941"),
 		);
 
-		expect(actualQuery).toBe("SELECT id, name FROM users LIMIT 10 OFFSET 20;");
+		expect(actualQuery).toBe(
+			"SELECT id, name FROM users WHERE created_at < '1706548941' ORDER BY created_at DESC LIMIT 10;",
+		);
 	});
 });

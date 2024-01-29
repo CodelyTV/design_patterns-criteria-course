@@ -13,6 +13,12 @@ export class CriteriaToSqlConverter {
 			query = query.concat(whereQuery.join(" AND "));
 		}
 
+		if (criteria.cursor !== null) {
+			query = query.concat(query.includes("WHERE") ? " AND " : " WHERE ");
+
+			query = query.concat(`${criteria.order.orderBy.value} < '${criteria.cursor}'`);
+		}
+
 		if (criteria.hasOrder()) {
 			query = query.concat(
 				` ORDER BY ${criteria.order.orderBy.value} ${criteria.order.orderType.value.valueOf()}`,
@@ -21,10 +27,6 @@ export class CriteriaToSqlConverter {
 
 		if (criteria.pageSize !== null) {
 			query = query.concat(` LIMIT ${criteria.pageSize}`);
-		}
-
-		if (criteria.pageSize !== null && criteria.pageNumber !== null) {
-			query = query.concat(` OFFSET ${criteria.pageSize * (criteria.pageNumber - 1)}`);
 		}
 
 		return `${query};`;
