@@ -1,6 +1,6 @@
 version: '3'
 services:
-  2-criteria_to_sql-mysql:
+  1-prepare_elastic-mysql:
     image: mariadb:11
     restart: always
     environment:
@@ -15,5 +15,17 @@ services:
       - db_data:/var/lib/mysql
       - ./databases/ecommerce.sql:/docker-entrypoint-initdb.d/init.sql
 
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.12.0
+    environment:
+      discovery.type: single-node
+      network.host: 0.0.0.0
+      xpack.security.enabled: "true"
+    ports:
+      - "9200:9200"
+    volumes:
+      - ./etc/elastic/config.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+      - es_data:/usr/share/elasticsearch/data
 volumes:
   db_data:
+  es_data:
