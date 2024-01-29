@@ -10,10 +10,10 @@ export class UsersByCriteriaSearcher {
 		filters: FiltersPrimitives[],
 		orderBy: string | null,
 		orderType: string | null,
-		limit: number | null,
-		offset: number | null,
+		pageSize: number | null,
+		pageNumber: number | null,
 	): Promise<User[]> {
-		const criteria = Criteria.fromPrimitives(filters, orderBy, orderType, limit, offset);
+		const criteria = Criteria.fromPrimitives(filters, orderBy, orderType, pageSize, pageNumber);
 
 		return this.repository.matching(criteria);
 	}
