@@ -5,7 +5,7 @@ import { CriteriaMother } from "../../../shared/domain/criteria/CriteriaMother";
 import { UserIdMother } from "../domain/UserIdMother";
 import { UserMother } from "../domain/UserMother";
 
-describe("MySqlUserRepository should", () => {
+describe("ElasticsearchUserRepository should", () => {
 	const client = new Client({ node: "http://localhost:9200" });
 	const repository = new ElasticsearchUserRepository(client);
 

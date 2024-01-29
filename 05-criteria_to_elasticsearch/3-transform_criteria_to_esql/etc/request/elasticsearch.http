@@ -32,5 +32,15 @@ POST localhost:9200/_query?format=txt
 Content-Type: application/json
 
 {
-  "query": "FROM users | WHERE name LIKE \"*Javi*\""
+  "query": "FROM users | WHERE name LIKE \"*Javi*\" AND email == \"Felton83@hotmail.com\""
+}
+
+###
+
+# Use new esql AND
+POST localhost:9200/_query?format=txt
+Content-Type: application/json
+
+{
+  "query": "FROM users | WHERE name LIKE \"*Javi*\" AND email == \"Felton83@hotmail.com\""
 }
