@@ -11,6 +11,8 @@ export type UserPrimitives = {
 };
 
 export class User {
+	public readonly createdAt: Date = new Date();
+
 	private constructor(
 		public readonly id: UserId,
 		private readonly name: UserName,

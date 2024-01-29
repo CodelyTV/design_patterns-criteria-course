@@ -22,6 +22,6 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
 
 	return NextResponse.json({
 		users: users.map((user) => user.toPrimitives()),
-		nextCursor: users,
+		nextCursor: users.at(-1)?.createdAt,
 	});
 }
