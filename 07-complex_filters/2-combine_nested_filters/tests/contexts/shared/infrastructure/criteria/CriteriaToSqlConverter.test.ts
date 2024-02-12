@@ -115,4 +115,22 @@ describe("CriteriaToSqlConverter should", () => {
 
 		expect(actualQuery).toBe("SELECT id, name FROM users WHERE name != 'Javier';");
 	});
+
+	it("Generate select with multiples filters and OR concatenation", () => {
+		const actualQuery = converter.convert(
+			["id", "name", "email"],
+			"users",
+			CriteriaMother.create({
+				filters: "name EQUAL Javier OR email EQUAL javier@terra.es",
+				orderBy: null,
+				orderType: null,
+				pageSize: null,
+				pageNumber: null,
+			}),
+		);
+
+		expect(actualQuery).toBe(
+			"SELECT id, name, email FROM users WHERE name = 'Javier' OR email = 'javier@terra.es';",
+		);
+	});
 });

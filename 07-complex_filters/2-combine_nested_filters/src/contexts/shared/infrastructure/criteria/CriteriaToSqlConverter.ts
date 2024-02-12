@@ -12,21 +12,28 @@ export class CriteriaToSqlConverter {
 		let query = `SELECT ${fieldsToSelect.join(", ")} FROM ${tableName}`;
 
 		if (criteria.hasFilters()) {
-			const filters = criteria.filters.value
-				.split(" AND ")
-				.map((filter) => {
-					const [field, operator, ...valueParts] = filter.split(" ");
-					let value = valueParts.join(" ");
-					const operatorValue = operators[operator];
+			const filters = criteria.filters.value.split(/ AND | OR /);
+			const connectors = criteria.filters.value.match(/ AND | OR /g) ?? [];
 
-					if (operator === "CONTAINS" || operator === "NOT_CONTAINS") {
-						value = `%${value}%`;
-					}
+			const queryFilters: string[] = [];
 
-					return `${field} ${operatorValue} '${value}'`;
-				})
-				.join(" AND ");
-			query += ` WHERE ${filters}`;
+			filters.forEach((filter, index) => {
+				const [field, operator, ...valueParts] = filter.split(" ");
+				let value = valueParts.join(" ");
+				const operatorValue = operators[operator];
+
+				if (operator === "CONTAINS" || operator === "NOT_CONTAINS") {
+					value = `%${value}%`;
+				}
+
+				queryFilters.push(`${field} ${operatorValue} '${value}'`);
+
+				if (index < connectors.length) {
+					queryFilters.push(connectors[index].trim());
+				}
+			});
+
+			query += ` WHERE ${queryFilters.join(" ")}`;
 		}
 
 		if (criteria.hasOrder()) {
