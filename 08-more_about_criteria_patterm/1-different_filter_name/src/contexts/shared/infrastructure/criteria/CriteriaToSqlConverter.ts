@@ -1,14 +1,23 @@
 import { Criteria } from "../../domain/criteria/Criteria";
 import { Filter } from "../../domain/criteria/Filter";
 
+type Mappings = { [key: string]: string };
+
 export class CriteriaToSqlConverter {
-	convert(fieldsToSelect: string[], tableName: string, criteria: Criteria): string {
+	convert(
+		fieldsToSelect: string[],
+		tableName: string,
+		criteria: Criteria,
+		mappings: Mappings = {},
+	): string {
 		let query = `SELECT ${fieldsToSelect.join(", ")} FROM ${tableName}`;
 
 		if (criteria.hasFilters()) {
 			query = query.concat(" WHERE ");
 
-			const whereQuery = criteria.filters.value.map((filter) => this.generateWhereQuery(filter));
+			const whereQuery = criteria.filters.value.map((filter) =>
+				this.generateWhereQuery(filter, mappings),
+			);
 
 			query = query.concat(whereQuery.join(" AND "));
 		}
@@ -30,19 +39,21 @@ export class CriteriaToSqlConverter {
 		return `${query};`;
 	}
 
-	private generateWhereQuery(filter: Filter) {
+	private generateWhereQuery(filter: Filter, mappings: Mappings = {}) {
+		const field = mappings[filter.field.value] || filter.field.value;
+
 		if (filter.operator.isContains()) {
-			return `${filter.field.value} LIKE '%${filter.value.value}%'`;
+			return `${field} LIKE '%${filter.value.value}%'`;
 		}
 
 		if (filter.operator.isNotContains()) {
-			return `${filter.field.value} NOT LIKE '%${filter.value.value}%'`;
+			return `${field} NOT LIKE '%${filter.value.value}%'`;
 		}
 
 		if (filter.operator.isNotEquals()) {
-			return `${filter.field.value} != '${filter.value.value}'`;
+			return `${field} != '${filter.value.value}'`;
 		}
 
-		return `${filter.field.value} ${filter.operator.value} '${filter.value.value}'`;
+		return `${field} ${filter.operator.value} '${filter.value.value}'`;
 	}
 }

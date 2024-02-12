@@ -147,4 +147,15 @@ describe("CriteriaToSqlConverter should", () => {
 
 		expect(actualQuery).toBe("SELECT id, name FROM users WHERE name != 'Javier';");
 	});
+
+	it("Generate select with one filter with a different name in the query", () => {
+		const actualQuery = converter.convert(
+			["id", "name"],
+			"users",
+			CriteriaMother.withOneFilter("fullname", "EQUAL", "Javier"),
+			{ fullname: "name" },
+		);
+
+		expect(actualQuery).toBe("SELECT id, name FROM users WHERE name = 'Javier';");
+	});
 });

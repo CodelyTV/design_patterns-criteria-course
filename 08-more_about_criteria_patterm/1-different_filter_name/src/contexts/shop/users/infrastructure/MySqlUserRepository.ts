@@ -51,7 +51,9 @@ export class MySqlUserRepository implements UserRepository {
 		const converter = new CriteriaToSqlConverter();
 
 		const result = await this.connection.searchAll<DatabaseUser>(
-			converter.convert(["id", "name", "email", "profile_picture"], "shop__users", criteria),
+			converter.convert(["id", "name", "email", "profile_picture"], "shop__users", criteria, {
+				fullname: "name",
+			}),
 		);
 
 		return result.map((user) =>
