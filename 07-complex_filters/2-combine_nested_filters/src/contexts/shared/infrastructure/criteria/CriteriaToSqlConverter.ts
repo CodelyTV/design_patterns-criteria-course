@@ -1,5 +1,4 @@
 import { Criteria } from "../../domain/criteria/Criteria";
-import { Filter } from "../../domain/criteria/Filter";
 
 export class CriteriaToSqlConverter {
 	convert(fieldsToSelect: string[], tableName: string, criteria: Criteria): string {
@@ -8,9 +7,7 @@ export class CriteriaToSqlConverter {
 		if (criteria.hasFilters()) {
 			query = query.concat(" WHERE ");
 
-			const whereQuery = criteria.filters.value.map((filter) => this.generateWhereQuery(filter));
-
-			query = query.concat(whereQuery.join(" AND "));
+			// Aquí hacer los cambios
 		}
 
 		if (criteria.hasOrder()) {
@@ -28,21 +25,5 @@ export class CriteriaToSqlConverter {
 		}
 
 		return `${query};`;
-	}
-
-	private generateWhereQuery(filter: Filter) {
-		if (filter.operator.isContains()) {
-			return `${filter.field.value} LIKE '%${filter.value.value}%'`;
-		}
-
-		if (filter.operator.isNotContains()) {
-			return `${filter.field.value} NOT LIKE '%${filter.value.value}%'`;
-		}
-
-		if (filter.operator.isNotEquals()) {
-			return `${filter.field.value} != '${filter.value.value}'`;
-		}
-
-		return `${filter.field.value} ${filter.operator.value} '${filter.value.value}'`;
 	}
 }

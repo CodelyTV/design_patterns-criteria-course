@@ -15,7 +15,7 @@ describe("UsersByCriteriaSearcher should", () => {
 
 		expect(
 			await usersByCriteriaSearcher.search(
-				criteria.filters.toPrimitives(),
+				criteria.filters.value,
 				criteria.order.orderBy.value,
 				criteria.order.orderType.value,
 				criteria.pageSize,

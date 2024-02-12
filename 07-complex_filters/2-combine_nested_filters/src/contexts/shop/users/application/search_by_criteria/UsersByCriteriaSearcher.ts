@@ -1,5 +1,4 @@
 import { Criteria } from "../../../../shared/domain/criteria/Criteria";
-import { FiltersPrimitives } from "../../../../shared/domain/criteria/Filter";
 import { User } from "../../domain/User";
 import { UserRepository } from "../../domain/UserRepository";
 
@@ -7,7 +6,7 @@ export class UsersByCriteriaSearcher {
 	constructor(private readonly repository: UserRepository) {}
 
 	async search(
-		filters: FiltersPrimitives[],
+		filters: string,
 		orderBy: string | null,
 		orderType: string | null,
 		pageSize: number | null,

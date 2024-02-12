@@ -1,4 +1,3 @@
-import { FiltersPrimitives } from "./Filter";
 import { Filters } from "./Filters";
 import { Order } from "./Order";
 
@@ -15,14 +14,14 @@ export class Criteria {
 	}
 
 	static fromPrimitives(
-		filters: FiltersPrimitives[],
+		filters: string,
 		orderBy: string | null,
 		orderType: string | null,
 		pageSize: number | null,
 		pageNumber: number | null,
 	): Criteria {
 		return new Criteria(
-			Filters.fromPrimitives(filters),
+			new Filters(filters),
 			Order.fromPrimitives(orderBy, orderType),
 			pageSize,
 			pageNumber,
