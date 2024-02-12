@@ -1,5 +1,9 @@
 import { Criteria } from "../../domain/criteria/Criteria";
 
+const operators: { [key: string]: string } = {
+	EQUAL: "=",
+};
+
 export class CriteriaToSqlConverter {
 	convert(fieldsToSelect: string[], tableName: string, criteria: Criteria): string {
 		let query = `SELECT ${fieldsToSelect.join(", ")} FROM ${tableName}`;
@@ -7,7 +11,12 @@ export class CriteriaToSqlConverter {
 		if (criteria.hasFilters()) {
 			query = query.concat(" WHERE ");
 
-			// Aquí hacer los cambios
+			const filters = criteria.filters.value.split(" ");
+			const field = filters[0];
+			const operator = filters[1];
+			const value = filters.slice(2).join(" ");
+
+			query = query.concat(`${field} ${operators[operator]} '${value}'`);
 		}
 
 		if (criteria.hasOrder()) {
