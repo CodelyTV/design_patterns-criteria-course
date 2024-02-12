@@ -133,4 +133,40 @@ describe("CriteriaToSqlConverter should", () => {
 			"SELECT id, name, email FROM users WHERE name = 'Javier' OR email = 'javier@terra.es';",
 		);
 	});
+
+	it("Generate select with multiple nested filter", () => {
+		const actualQuery = converter.convert(
+			["id", "name", "email"],
+			"users",
+			CriteriaMother.create({
+				filters: "name EQUAL Javier AND (email CONTAINS terra.es OR email CONTAINS yahoo.es)",
+				orderBy: null,
+				orderType: null,
+				pageSize: null,
+				pageNumber: null,
+			}),
+		);
+
+		expect(actualQuery).toBe(
+			"SELECT id, name, email FROM users WHERE name = 'Javier' AND (email LIKE '%terra.es%' OR email LIKE '%yahoo.es%');",
+		);
+	});
+
+	it("Generate select with multiple nested filter with OR connector", () => {
+		const actualQuery = converter.convert(
+			["id", "name", "email"],
+			"users",
+			CriteriaMother.create({
+				filters: "name EQUAL Javier OR (email CONTAINS terra.es OR email CONTAINS yahoo.es)",
+				orderBy: null,
+				orderType: null,
+				pageSize: null,
+				pageNumber: null,
+			}),
+		);
+
+		expect(actualQuery).toBe(
+			"SELECT id, name, email FROM users WHERE name = 'Javier' OR (email LIKE '%terra.es%' OR email LIKE '%yahoo.es%');",
+		);
+	});
 });
