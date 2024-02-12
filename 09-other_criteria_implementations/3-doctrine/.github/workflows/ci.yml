@@ -1,0 +1,59 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - run: docker compose pull
+
+      - name: 🎻 Install dependencies
+        run: make composer-install
+
+      - name: 🐳 Start all the environment
+        run: make start
+
+      - name: 🔦 Lint
+        run: make lint
+
+      - name: 🏁 Static analysis
+        run: make static-analysis
+
+      - name: 🏗️ Architecture
+        run: make test-architecture
+
+      - name: 🗑️ Mess detector
+        run: make mess-detector
+
+      - name: 🦭 Wait for the database to get up
+        run: |
+          while ! make ping-mysql &>/dev/null; do
+              echo "Waiting for database connection..."
+              sleep 2
+          done
+
+      - name: 🧪 Wait for the Elasticsearch to get up
+        run: |
+          while ! make ping-elasticsearch &>/dev/null; do
+              echo "Waiting for elasticsearch connection..."
+              sleep 2
+          done
+
+      - name: 🐰 Wait for RabbitMQ to get up
+        run: |
+          while ! make ping-rabbitmq &>/dev/null; do
+              echo "Waiting for RabbitMQ connection..."
+              sleep 2
+          done
+
+      - name: ✅ Run the tests
+        run: make test

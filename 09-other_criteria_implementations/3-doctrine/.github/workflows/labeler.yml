@@ -1,0 +1,18 @@
+name: labeler
+
+on: [pull_request]
+
+jobs:
+  labeler:
+    runs-on: ubuntu-latest
+    name: Label the PR size
+    steps:
+      - uses: codelytv/pr-size-labeler@v1.8.1
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          xs_max_size: '10'
+          s_max_size: '300'
+          m_max_size: '600'
+          l_max_size: '1400'
+          fail_if_xl: 'true'
+          files_to_ignore: 'composer.lock'
