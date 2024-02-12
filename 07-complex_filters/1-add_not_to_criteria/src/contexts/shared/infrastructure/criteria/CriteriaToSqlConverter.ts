@@ -39,6 +39,10 @@ export class CriteriaToSqlConverter {
 			return `${filter.field.value} NOT LIKE '%${filter.value.value}%'`;
 		}
 
+		if (filter.operator.isNotEquals()) {
+			return `${filter.field.value} != '${filter.value.value}'`;
+		}
+
 		return `${filter.field.value} ${filter.operator.value} '${filter.value.value}'`;
 	}
 }

@@ -17,4 +17,8 @@ export class FilterOperator {
 	isNotContains(): boolean {
 		return this.value.valueOf() === Operator.NOT_CONTAINS.valueOf();
 	}
+
+	isNotEquals(): boolean {
+		return this.value.valueOf() === Operator.NOT_EQUAL.valueOf();
+	}
 }

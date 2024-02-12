@@ -127,4 +127,24 @@ describe("CriteriaToSqlConverter should", () => {
 
 		expect(actualQuery).toBe("SELECT id, name FROM users LIMIT 10 OFFSET 20;");
 	});
+
+	it("Generate select with not contains filter", () => {
+		const actualQuery = converter.convert(
+			["id", "name"],
+			"users",
+			CriteriaMother.withOneFilter("name", "NOT_CONTAINS", "Javier"),
+		);
+
+		expect(actualQuery).toBe("SELECT id, name FROM users WHERE name NOT LIKE '%Javier%';");
+	});
+
+	it("Generate select with not equals filter", () => {
+		const actualQuery = converter.convert(
+			["id", "name"],
+			"users",
+			CriteriaMother.withOneFilter("name", "NOT_EQUAL", "Javier"),
+		);
+
+		expect(actualQuery).toBe("SELECT id, name FROM users WHERE name != 'Javier';");
+	});
 });
