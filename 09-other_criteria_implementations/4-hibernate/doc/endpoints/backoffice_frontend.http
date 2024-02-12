@@ -1,0 +1,80 @@
+# ELASTIC - Search
+POST localhost:9200/backoffice_courses/_search
+Content-Type: application/json
+
+{
+  "query": {
+    "term": {
+      "name": "git avanzado"
+    }
+  }
+}
+
+###
+
+# ELASTIC - debug
+POST localhost:9200/backoffice_courses/_search
+Content-Type: application/json
+
+{
+  "from": 0,
+  "size": 1000,
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "term": {
+            "name": {
+              "value": "pepe2"
+            }
+          }
+        }
+      ],
+      "adjust_pure_negative": true,
+      "boost": 1.0
+    }
+  }
+}
+
+###
+# ELASTIC - Search
+POST localhost:9200/backoffice_courses/_search
+Content-Type: application/json
+
+###
+# ELASTIC - Mapping
+GET localhost:9200/backoffice_courses/_mapping
+Content-Type: application/json
+
+###
+# ELASTIC - Change mapping
+PUT localhost:9200/backoffice_courses/_mapping/_doc
+Content-Type: application/json
+
+{
+  "properties": {
+    "name": {
+      "type": "text",
+      "fielddata": true
+    }
+  }
+}
+
+###
+# ELASTIC - DELETE
+DELETE localhost:9200/backoffice_courses
+
+###
+
+PUT localhost:9200/backoffice_courses/_settings
+Content-Type: application/json
+
+{
+  "index": {
+    "blocks": {
+      "read_only_allow_delete": "false"
+    }
+  }
+}
+
+###

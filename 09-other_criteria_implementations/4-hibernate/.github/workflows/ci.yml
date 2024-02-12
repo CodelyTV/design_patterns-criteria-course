@@ -1,0 +1,31 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 🐳 Start all the environment
+        run: make start
+
+      - name: 🔦 Lint
+        run: make lint
+
+      - name: 🦭 Wait for the environment to get up
+        run: |
+          while ! make ping-mysql &>/dev/null; do
+              echo "Waiting for database connection..."
+              sleep 2
+          done
+
+      - name: ✅ Run the tests
+        run: make test
