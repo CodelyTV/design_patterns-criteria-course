@@ -2,6 +2,7 @@ import { Criteria } from "../../domain/criteria/Criteria";
 
 const operators: { [key: string]: string } = {
 	EQUAL: "=",
+	NOT_EQUAL: "!=",
 	CONTAINS: "LIKE",
 	NOT_CONTAINS: "NOT LIKE",
 };
