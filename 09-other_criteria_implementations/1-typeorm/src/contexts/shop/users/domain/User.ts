@@ -13,9 +13,9 @@ export type UserPrimitives = {
 export class User {
 	private constructor(
 		public readonly id: UserId,
-		private readonly name: UserName,
-		private readonly email: UserEmail,
-		private readonly profilePicture: UserProfilePicture,
+		public readonly name: UserName,
+		public readonly email: UserEmail,
+		public readonly profilePicture: UserProfilePicture,
 	) {}
 
 	static create(id: string, name: string, email: string, profilePicture: string): User {
