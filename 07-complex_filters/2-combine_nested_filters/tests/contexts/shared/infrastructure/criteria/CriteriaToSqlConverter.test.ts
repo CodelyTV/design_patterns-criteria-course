@@ -58,44 +58,33 @@ describe("CriteriaToSqlConverter should", () => {
 		);
 	});
 
-	// it("Generate select with multiples filters and sort", () => {
-	// 	const actualQuery = converter.convert(
-	// 		["id", "name", "email"],
-	// 		"users",
-	// 		CriteriaMother.create({
-	// 			filters: [
-	// 				{
-	// 					field: "name",
-	// 					operator: "EQUAL",
-	// 					value: "Javier",
-	// 				},
-	// 				{
-	// 					field: "email",
-	// 					operator: "EQUAL",
-	// 					value: "javier@terra.es",
-	// 				},
-	// 			],
-	// 			orderBy: "id",
-	// 			orderType: "DESC",
-	// 			pageSize: null,
-	// 			pageNumber: null,
-	// 		}),
-	// 	);
-	//
-	// 	expect(actualQuery).toBe(
-	// 		"SELECT id, name, email FROM users WHERE name = 'Javier' AND email = 'javier@terra.es' ORDER BY id DESC;",
-	// 	);
-	// });
-	//
-	// it("Generate select with one contains filter", () => {
-	// 	const actualQuery = converter.convert(
-	// 		["id", "name"],
-	// 		"users",
-	// 		CriteriaMother.withOneFilter("name", "CONTAINS", "Javier"),
-	// 	);
-	//
-	// 	expect(actualQuery).toBe("SELECT id, name FROM users WHERE name LIKE '%Javier%';");
-	// });
+	it("Generate select with multiples filters and sort", () => {
+		const actualQuery = converter.convert(
+			["id", "name", "email"],
+			"users",
+			CriteriaMother.create({
+				filters: "name EQUAL Javier AND email EQUAL javier@terra.es",
+				orderBy: "id",
+				orderType: "DESC",
+				pageSize: null,
+				pageNumber: null,
+			}),
+		);
+
+		expect(actualQuery).toBe(
+			"SELECT id, name, email FROM users WHERE name = 'Javier' AND email = 'javier@terra.es' ORDER BY id DESC;",
+		);
+	});
+
+	it("Generate select with one contains filter", () => {
+		const actualQuery = converter.convert(
+			["id", "name"],
+			"users",
+			CriteriaMother.withOneFilter("name CONTAINS Javier"),
+		);
+
+		expect(actualQuery).toBe("SELECT id, name FROM users WHERE name LIKE '%Javier%';");
+	});
 	//
 	// it("Generate select with one not contains filter", () => {
 	// 	const actualQuery = converter.convert(

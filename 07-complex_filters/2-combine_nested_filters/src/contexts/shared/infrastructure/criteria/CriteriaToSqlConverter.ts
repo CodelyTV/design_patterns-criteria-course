@@ -2,6 +2,7 @@ import { Criteria } from "../../domain/criteria/Criteria";
 
 const operators: { [key: string]: string } = {
 	EQUAL: "=",
+	CONTAINS: "LIKE",
 };
 
 export class CriteriaToSqlConverter {
@@ -13,9 +14,14 @@ export class CriteriaToSqlConverter {
 				.split(" AND ")
 				.map((filter) => {
 					const [field, operator, ...valueParts] = filter.split(" ");
-					const value = valueParts.join(" ");
+					let value = valueParts.join(" ");
+					const operatorValue = operators[operator];
 
-					return `${field} ${operators[operator]} '${value}'`;
+					if (operatorValue === "LIKE") {
+						value = `%${value}%`;
+					}
+
+					return `${field} ${operatorValue} '${value}'`;
 				})
 				.join(" AND ");
 			query += ` WHERE ${filters}`;
