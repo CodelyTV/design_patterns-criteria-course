@@ -12,7 +12,9 @@ export class CriteriaToSqlConverter {
 		let query = `SELECT ${fieldsToSelect.join(", ")} FROM ${tableName}`;
 
 		if (criteria.hasFilters()) {
-			query = query.concat(this.processFilters(criteria));
+			const whereClause = this.processFilters(criteria.filters.value);
+
+			query = query.concat(` WHERE ${whereClause}`);
 		}
 
 		if (criteria.hasOrder()) {
@@ -32,16 +34,11 @@ export class CriteriaToSqlConverter {
 		return `${query};`;
 	}
 
-	private processFilters(criteria: Criteria): string {
-		const whereClause = this.recursiveFilterProcessing(criteria.filters.value);
-
-		return ` WHERE ${whereClause}`;
-	}
-
-	private recursiveFilterProcessing(filterString: string): string {
+	private processFilters(filterString: string): string {
 		if (!/\(([^()]+)\)/.test(filterString)) {
 			return this.buildFilterQuery(filterString);
 		}
+
 		let resultString = "";
 		let cursor = 0;
 
@@ -67,6 +64,7 @@ export class CriteriaToSqlConverter {
 		}
 
 		const postParenthesisPart = filterString.substring(cursor).trim();
+
 		if (postParenthesisPart) {
 			resultString += ` AND ${this.buildFilterQuery(postParenthesisPart)}`;
 		}
