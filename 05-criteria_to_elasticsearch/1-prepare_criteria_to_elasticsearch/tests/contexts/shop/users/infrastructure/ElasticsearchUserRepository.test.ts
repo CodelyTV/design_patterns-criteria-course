@@ -2,7 +2,7 @@ import { ElasticsearchUserRepository } from "../../../../../src/contexts/shop/us
 import { UserIdMother } from "../domain/UserIdMother";
 import { UserMother } from "../domain/UserMother";
 
-describe("MySqlUserRepository should", () => {
+describe("ElasticsearchUserRepository should", () => {
 	const repository = new ElasticsearchUserRepository();
 
 	it("save a user", async () => {
