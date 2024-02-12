@@ -9,14 +9,16 @@ export class CriteriaToSqlConverter {
 		let query = `SELECT ${fieldsToSelect.join(", ")} FROM ${tableName}`;
 
 		if (criteria.hasFilters()) {
-			query = query.concat(" WHERE ");
+			const filters = criteria.filters.value
+				.split(" AND ")
+				.map((filter) => {
+					const [field, operator, ...valueParts] = filter.split(" ");
+					const value = valueParts.join(" ");
 
-			const filters = criteria.filters.value.split(" ");
-			const field = filters[0];
-			const operator = filters[1];
-			const value = filters.slice(2).join(" ");
-
-			query = query.concat(`${field} ${operators[operator]} '${value}'`);
+					return `${field} ${operators[operator]} '${value}'`;
+				})
+				.join(" AND ");
+			query += ` WHERE ${filters}`;
 		}
 
 		if (criteria.hasOrder()) {
