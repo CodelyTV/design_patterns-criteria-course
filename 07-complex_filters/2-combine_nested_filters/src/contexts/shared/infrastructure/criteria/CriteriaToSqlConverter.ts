@@ -3,6 +3,7 @@ import { Criteria } from "../../domain/criteria/Criteria";
 const operators: { [key: string]: string } = {
 	EQUAL: "=",
 	CONTAINS: "LIKE",
+	NOT_CONTAINS: "NOT LIKE",
 };
 
 export class CriteriaToSqlConverter {
@@ -17,7 +18,7 @@ export class CriteriaToSqlConverter {
 					let value = valueParts.join(" ");
 					const operatorValue = operators[operator];
 
-					if (operatorValue === "LIKE") {
+					if (operator === "CONTAINS" || operator === "NOT_CONTAINS") {
 						value = `%${value}%`;
 					}
 
