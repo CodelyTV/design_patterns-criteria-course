@@ -1,0 +1,31 @@
+version: '3'
+services:
+  1-prepare_elastic-mysql:
+    image: mariadb:11
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: adminpassword
+      MYSQL_DATABASE: ecommerce
+      MYSQL_USER: codely
+      MYSQL_PASSWORD: c0d3ly7v
+      TZ: UTC
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./databases/ecommerce.sql:/docker-entrypoint-initdb.d/init.sql
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.12.0
+    environment:
+      discovery.type: single-node
+      network.host: 0.0.0.0
+      xpack.security.enabled: "true"
+    ports:
+      - "9200:9200"
+    volumes:
+      - ./etc/elastic/config.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+      - es_data:/usr/share/elasticsearch/data
+volumes:
+  db_data:
+  es_data:
