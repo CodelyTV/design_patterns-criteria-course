@@ -63,13 +63,7 @@ export class CriteriaToSqlConverter {
 			cursor = match.index + match[0].length;
 		}
 
-		const postParenthesisPart = filterString.substring(cursor).trim();
-
-		if (postParenthesisPart) {
-			resultString += ` AND ${this.buildFilterQuery(postParenthesisPart)}`;
-		}
-
-		return resultString.replace(/^\s*AND\s*|\s*AND\s*$/g, "");
+		return resultString;
 	}
 
 	private buildFilterQuery(filter: string): string {

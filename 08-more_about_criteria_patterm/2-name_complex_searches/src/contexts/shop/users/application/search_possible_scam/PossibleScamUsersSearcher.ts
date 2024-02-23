@@ -2,7 +2,7 @@ import { PossibleScamUsersCriteriaFactory } from "../../domain/PossibleScamUsers
 import { User } from "../../domain/User";
 import { UserRepository } from "../../domain/UserRepository";
 
-export class UsersByCriteriaSearcher {
+export class PossibleScamUsersSearcher {
 	constructor(private readonly repository: UserRepository) {}
 
 	async search(): Promise<User[]> {
