@@ -93,4 +93,14 @@ describe("CriteriaToSqlConverter should", () => {
 			"SELECT id, name, email FROM users WHERE name = 'Javier' AND email = 'javier@terra.es' ORDER BY id DESC;",
 		);
 	});
+
+	it('Generate select with one filter and "CONTAINS" operator', () => {
+		const actualQuery = converter.convert(
+			["id", "name"],
+			"users",
+			CriteriaMother.withOneFilter("name", "CONTAINS", "tuttodev"),
+		);
+
+		expect(actualQuery).toBe("SELECT id, name FROM users WHERE name LIKE '%tuttodev%';");
+	});
 });
