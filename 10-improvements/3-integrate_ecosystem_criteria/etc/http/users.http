@@ -1,0 +1,3 @@
+### Get filtered users
+GET http://127.0.0.1:8000/users?filters[0][field]=email&filters[0][operator]=contains&filters[0][value]=%25javi%25&order=asc&orderBy=name&limit=10&offset=0&page=1
+Accept: application/json

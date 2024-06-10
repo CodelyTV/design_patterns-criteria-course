@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3bd30692006c0b894ecd2437a2de1438",
+    "content-hash": "cde2b4ea77ae7d57157f32fff7d9238f",
     "packages": [
         {
             "name": "brick/math",
@@ -283,6 +283,93 @@
                 "source": "https://github.com/ComplexHeart/php-domain-model/tree/v4.0.1"
             },
             "time": "2024-04-02T02:48:37+00:00"
+        },
+        {
+            "name": "complex-heart/on-laravel",
+            "version": "v0.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ComplexHeart/on-laravel.git",
+                "reference": "1182d346b520875f87341b7b61e1bd79564559a5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ComplexHeart/on-laravel/zipball/1182d346b520875f87341b7b61e1bd79564559a5",
+                "reference": "1182d346b520875f87341b7b61e1bd79564559a5",
+                "shasum": ""
+            },
+            "require": {
+                "complex-heart/sdk": "^2.0.0",
+                "laravel/framework": "^11.0.0",
+                "php": "^8.2.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.6",
+                "pestphp/pest": "*",
+                "pestphp/pest-plugin-faker": "^2.0",
+                "phpstan/phpstan": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "ComplexHeart\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Unay Santisteban",
+                    "email": "usantisteban@othercode.io"
+                }
+            ],
+            "description": "Domain driven design tools for Laravel.",
+            "support": {
+                "issues": "https://github.com/ComplexHeart/on-laravel/issues",
+                "source": "https://github.com/ComplexHeart/on-laravel/tree/v0.3.0"
+            },
+            "time": "2024-04-02T02:34:43+00:00"
+        },
+        {
+            "name": "complex-heart/sdk",
+            "version": "v2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ComplexHeart/php-sdk.git",
+                "reference": "b3a5d353ade5e602a5d0d791388de87e4c8a2b3b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ComplexHeart/php-sdk/zipball/b3a5d353ade5e602a5d0d791388de87e4c8a2b3b",
+                "reference": "b3a5d353ade5e602a5d0d791388de87e4c8a2b3b",
+                "shasum": ""
+            },
+            "require": {
+                "complex-heart/contracts": "^2.0.0",
+                "complex-heart/criteria": "^4.0.0",
+                "complex-heart/domain-model": "^4.0.0",
+                "ext-json": "*",
+                "php": "^8.2"
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Unay Santisteban",
+                    "email": "usantisteban@othercode.io"
+                }
+            ],
+            "description": "Domain model toolset to properly build Value Objects, Entities, Aggregates and Services.",
+            "support": {
+                "issues": "https://github.com/ComplexHeart/php-sdk/issues",
+                "source": "https://github.com/ComplexHeart/php-sdk/tree/v2.0.0"
+            },
+            "time": "2024-04-02T02:18:29+00:00"
         },
         {
             "name": "dflydev/dot-access-data",
