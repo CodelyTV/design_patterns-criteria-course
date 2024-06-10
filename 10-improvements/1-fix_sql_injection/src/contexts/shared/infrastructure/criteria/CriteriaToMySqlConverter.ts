@@ -3,7 +3,7 @@ import { Filter } from "../../domain/criteria/Filter";
 
 type Mappings = { [key: string]: string };
 
-export class CriteriaToSqlConverter {
+export class CriteriaToMySqlConverter {
 	convert(
 		fieldsToSelect: string[],
 		tableName: string,

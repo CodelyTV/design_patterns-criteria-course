@@ -1,5 +1,5 @@
 import { Criteria } from "../../../shared/domain/criteria/Criteria";
-import { CriteriaToSqlConverter } from "../../../shared/infrastructure/criteria/CriteriaToSqlConverter";
+import { CriteriaToMySqlConverter } from "../../../shared/infrastructure/criteria/CriteriaToMySqlConverter";
 import { MariaDBConnection } from "../../../shared/infrastructure/MariaDBConnection";
 import { User } from "../domain/User";
 import { UserId } from "../domain/UserId";
@@ -48,7 +48,7 @@ export class MySqlUserRepository implements UserRepository {
 	}
 
 	async matching(criteria: Criteria): Promise<User[]> {
-		const converter = new CriteriaToSqlConverter();
+		const converter = new CriteriaToMySqlConverter();
 
 		const result = await this.connection.searchAll<DatabaseUser>(
 			converter.convert(["id", "name", "email", "profile_picture"], "shop__users", criteria, {

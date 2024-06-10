@@ -1,8 +1,8 @@
-import { CriteriaToSqlConverter } from "../../../../../src/contexts/shared/infrastructure/criteria/CriteriaToSqlConverter";
+import { CriteriaToMySqlConverter } from "../../../../../src/contexts/shared/infrastructure/criteria/CriteriaToMySqlConverter";
 import { CriteriaMother } from "../../domain/criteria/CriteriaMother";
 
-describe("CriteriaToSqlConverter should", () => {
-	const converter = new CriteriaToSqlConverter();
+describe("CriteriaToMySqlConverter should", () => {
+	const converter = new CriteriaToMySqlConverter();
 
 	it("Generate simple select with an empty criteria", () => {
 		const actualQuery = converter.convert(["id", "name"], "users", CriteriaMother.empty());
