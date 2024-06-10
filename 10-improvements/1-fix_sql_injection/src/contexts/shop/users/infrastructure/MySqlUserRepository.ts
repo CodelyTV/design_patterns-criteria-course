@@ -50,11 +50,16 @@ export class MySqlUserRepository implements UserRepository {
 	async matching(criteria: Criteria): Promise<User[]> {
 		const converter = new CriteriaToMySqlConverter();
 
-		const result = await this.connection.searchAll<DatabaseUser>(
-			converter.convert(["id", "name", "email", "profile_picture"], "shop__users", criteria, {
+		const query = converter.convert(
+			["id", "name", "email", "profile_picture"],
+			"shop__users",
+			criteria,
+			{
 				fullname: "name",
-			}),
+			},
 		);
+
+		const result = await this.connection.searchAll<DatabaseUser>(query);
 
 		return result.map((user) =>
 			User.fromPrimitives({

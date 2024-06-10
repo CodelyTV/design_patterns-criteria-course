@@ -41,7 +41,11 @@ export class CriteriaToMySqlConverterFixed {
 			params.push(criteria.pageSize * (criteria.pageNumber - 1));
 		}
 
-		return { query: `${query};`, params };
+		const finalQuery = { query: `${query};`, params };
+
+		console.log(finalQuery);
+
+		return finalQuery;
 	}
 
 	private generateWhereQuery(
