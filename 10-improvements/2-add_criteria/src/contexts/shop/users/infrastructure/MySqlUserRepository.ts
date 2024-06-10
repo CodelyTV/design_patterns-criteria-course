@@ -1,5 +1,3 @@
-import { Criteria } from "../../../shared/domain/criteria/Criteria";
-import { CriteriaToMySqlConverter } from "../../../shared/infrastructure/criteria/CriteriaToMySqlConverter";
 import { MariaDBConnection } from "../../../shared/infrastructure/MariaDBConnection";
 import { User } from "../domain/User";
 import { UserId } from "../domain/UserId";
@@ -47,26 +45,49 @@ export class MySqlUserRepository implements UserRepository {
 		});
 	}
 
-	async matching(criteria: Criteria): Promise<User[]> {
-		const converter = new CriteriaToMySqlConverter();
+	async containingName(name: string): Promise<User[]> {
+		const query = `SELECT id, name, email, profile_picture FROM shop__users WHERE name LIKE '%${name}%';`;
 
-		const query = converter.convert(
-			["id", "name", "email", "profile_picture"],
-			"shop__users",
-			criteria,
-			{
-				fullname: "name",
-			},
-		);
+		const results: DatabaseUser[] = await this.connection.searchAll<DatabaseUser>(query);
 
-		const result = await this.connection.searchAll<DatabaseUser>(query);
-
-		return result.map((user) =>
+		return results.map((result) =>
 			User.fromPrimitives({
-				id: user.id,
-				name: user.name,
-				email: user.email,
-				profilePicture: user.profile_picture,
+				id: result.id,
+				name: result.name,
+				email: result.email,
+				profilePicture: result.profile_picture,
+			}),
+		);
+	}
+
+	async containingEmail(email: string): Promise<User[]> {
+		const query = `SELECT id, name, email, profile_picture FROM shop__users WHERE email LIKE '%${email}%';`;
+
+		const results: DatabaseUser[] = await this.connection.searchAll<DatabaseUser>(query);
+
+		return results.map((result) =>
+			User.fromPrimitives({
+				id: result.id,
+				name: result.name,
+				email: result.email,
+				profilePicture: result.profile_picture,
+			}),
+		);
+	}
+
+	async containingNameAndEmail(name: string, email: string): Promise<User[]> {
+		const query = `SELECT id, name, email, profile_picture FROM shop__users
+		WHERE name LIKE '%${name}%'
+		AND email LIKE '%${email}%';`;
+
+		const results: DatabaseUser[] = await this.connection.searchAll<DatabaseUser>(query);
+
+		return results.map((result) =>
+			User.fromPrimitives({
+				id: result.id,
+				name: result.name,
+				email: result.email,
+				profilePicture: result.profile_picture,
 			}),
 		);
 	}

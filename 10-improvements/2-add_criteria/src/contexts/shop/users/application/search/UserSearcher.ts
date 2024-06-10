@@ -6,6 +6,6 @@ export class UserSearcher {
 	constructor(private readonly repository: UserRepository) {}
 
 	async search(id: string): Promise<User | null> {
-		return this.repository.search(new UserId(id));
+		return await this.repository.search(new UserId(id));
 	}
 }

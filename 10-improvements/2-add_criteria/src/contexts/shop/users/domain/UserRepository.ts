@@ -1,4 +1,3 @@
-import { Criteria } from "../../../shared/domain/criteria/Criteria";
 import { User } from "./User";
 import { UserId } from "./UserId";
 
@@ -7,5 +6,9 @@ export interface UserRepository {
 
 	search(id: UserId): Promise<User | null>;
 
-	matching(criteria: Criteria): Promise<User[]>;
+	containingName(name: string): Promise<User[]>;
+
+	containingEmail(email: string): Promise<User[]>;
+
+	containingNameAndEmail(name: string, email: string): Promise<User[]>;
 }
