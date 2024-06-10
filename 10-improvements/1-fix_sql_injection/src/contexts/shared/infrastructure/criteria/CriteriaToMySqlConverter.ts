@@ -36,7 +36,11 @@ export class CriteriaToMySqlConverter {
 			query = query.concat(` OFFSET ${criteria.pageSize * (criteria.pageNumber - 1)}`);
 		}
 
-		return `${query};`;
+		const finalQuery = `${query};`;
+
+		console.log(finalQuery);
+
+		return finalQuery;
 	}
 
 	private generateWhereQuery(filter: Filter, mappings: Mappings = {}) {
