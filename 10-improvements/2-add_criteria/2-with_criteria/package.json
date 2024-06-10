@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@codelytv/criteria": "^1.2.0",
+    "@codelytv/criteria-mysql": "^1.1.1",
     "@elastic/elasticsearch": "^8.11.0",
     "mariadb": "^3.2.3",
     "next": "14.0.4",

@@ -1,3 +1,5 @@
+import { Criteria } from "@codelytv/criteria";
+
 import { User } from "./User";
 import { UserId } from "./UserId";
 
@@ -6,9 +8,5 @@ export interface UserRepository {
 
 	search(id: UserId): Promise<User | null>;
 
-	containingName(name: string): Promise<User[]>;
-
-	containingEmail(email: string): Promise<User[]>;
-
-	containingNameAndEmail(name: string, email: string): Promise<User[]>;
+	matching(criteria: Criteria): Promise<User[]>;
 }

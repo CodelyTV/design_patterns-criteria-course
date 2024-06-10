@@ -1,3 +1,6 @@
+import { Criteria } from "@codelytv/criteria";
+import { CriteriaToMySqlConverter } from "@codelytv/criteria-mysql/src";
+
 import { MariaDBConnection } from "../../../shared/infrastructure/MariaDBConnection";
 import { User } from "../domain/User";
 import { UserId } from "../domain/UserId";
@@ -45,49 +48,26 @@ export class MySqlUserRepository implements UserRepository {
 		});
 	}
 
-	async containingName(name: string): Promise<User[]> {
-		const query = `SELECT id, name, email, profile_picture FROM shop__users WHERE name LIKE '%${name}%';`;
+	async matching(criteria: Criteria): Promise<User[]> {
+		const converter = new CriteriaToMySqlConverter();
 
-		const results: DatabaseUser[] = await this.connection.searchAll<DatabaseUser>(query);
-
-		return results.map((result) =>
-			User.fromPrimitives({
-				id: result.id,
-				name: result.name,
-				email: result.email,
-				profilePicture: result.profile_picture,
-			}),
+		const { query, params } = converter.convert(
+			["id", "name", "email", "profile_picture"],
+			"shop__users",
+			criteria,
+			{
+				fullname: "name",
+			},
 		);
-	}
 
-	async containingEmail(email: string): Promise<User[]> {
-		const query = `SELECT id, name, email, profile_picture FROM shop__users WHERE email LIKE '%${email}%';`;
+		const result = await this.connection.searchAll<DatabaseUser>(query, params);
 
-		const results: DatabaseUser[] = await this.connection.searchAll<DatabaseUser>(query);
-
-		return results.map((result) =>
+		return result.map((user) =>
 			User.fromPrimitives({
-				id: result.id,
-				name: result.name,
-				email: result.email,
-				profilePicture: result.profile_picture,
-			}),
-		);
-	}
-
-	async containingNameAndEmail(name: string, email: string): Promise<User[]> {
-		const query = `SELECT id, name, email, profile_picture FROM shop__users
-		WHERE name LIKE '%${name}%'
-		AND email LIKE '%${email}%';`;
-
-		const results: DatabaseUser[] = await this.connection.searchAll<DatabaseUser>(query);
-
-		return results.map((result) =>
-			User.fromPrimitives({
-				id: result.id,
-				name: result.name,
-				email: result.email,
-				profilePicture: result.profile_picture,
+				id: user.id,
+				name: user.name,
+				email: user.email,
+				profilePicture: user.profile_picture,
 			}),
 		);
 	}
