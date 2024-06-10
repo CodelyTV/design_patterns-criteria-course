@@ -1,6 +1,3 @@
-import assert from "node:assert";
-import { describe, it } from "node:test";
-
 import { CriteriaToMySqlConverterFixed } from "../../../../../src/contexts/shared/infrastructure/criteria/CriteriaToMySqlConverterFixed";
 import { CriteriaMother } from "../../domain/criteria/CriteriaMother";
 
@@ -10,7 +7,7 @@ describe("CriteriaToMySqlConverterFixed should", () => {
 	it("Generate simple select with an empty criteria", () => {
 		const actualQuery = converter.convert(["id", "name"], "users", CriteriaMother.empty());
 
-		assert.deepEqual(actualQuery, { query: "SELECT id, name FROM users;", params: [] });
+		expect(actualQuery).toStrictEqual({ query: "SELECT id, name FROM users;", params: [] });
 	});
 
 	it("Generate select with order", () => {
@@ -20,7 +17,7 @@ describe("CriteriaToMySqlConverterFixed should", () => {
 			CriteriaMother.emptySorted("id", "DESC"),
 		);
 
-		assert.deepEqual(actualQuery, {
+		expect(actualQuery).toStrictEqual({
 			query: "SELECT id, name FROM users ORDER BY ? ?;",
 			params: ["id", "DESC"],
 		});
@@ -33,7 +30,7 @@ describe("CriteriaToMySqlConverterFixed should", () => {
 			CriteriaMother.withOneFilter("name", "EQUAL", "Javier"),
 		);
 
-		assert.deepEqual(actualQuery, {
+		expect(actualQuery).toStrictEqual({
 			query: "SELECT id, name FROM users WHERE name = ?;",
 			params: ["Javier"],
 		});
@@ -46,9 +43,9 @@ describe("CriteriaToMySqlConverterFixed should", () => {
 			CriteriaMother.withOneFilter("age", "GREATER_THAN", "25"),
 		);
 
-		assert.deepEqual(actualQuery, {
+		expect(actualQuery).toStrictEqual({
 			query: "SELECT id, age FROM users WHERE age > ?;",
-			params: [25],
+			params: ["25"],
 		});
 	});
 
@@ -59,9 +56,9 @@ describe("CriteriaToMySqlConverterFixed should", () => {
 			CriteriaMother.withOneFilter("age", "GREATER_THAN_OR_EQUAL", "25"),
 		);
 
-		assert.deepEqual(actualQuery, {
+		expect(actualQuery).toStrictEqual({
 			query: "SELECT id, age FROM users WHERE age >= ?;",
-			params: [25],
+			params: ["25"],
 		});
 	});
 
@@ -72,9 +69,9 @@ describe("CriteriaToMySqlConverterFixed should", () => {
 			CriteriaMother.withOneFilter("age", "LOWER_THAN", "18"),
 		);
 
-		assert.deepEqual(actualQuery, {
+		expect(actualQuery).toStrictEqual({
 			query: "SELECT id, age FROM users WHERE age < ?;",
-			params: [18],
+			params: ["18"],
 		});
 	});
 
@@ -85,9 +82,9 @@ describe("CriteriaToMySqlConverterFixed should", () => {
 			CriteriaMother.withOneFilter("age", "LOWER_THAN_OR_EQUAL", "18"),
 		);
 
-		assert.deepEqual(actualQuery, {
+		expect(actualQuery).toStrictEqual({
 			query: "SELECT id, age FROM users WHERE age <= ?;",
-			params: [18],
+			params: ["18"],
 		});
 	});
 
@@ -98,7 +95,7 @@ describe("CriteriaToMySqlConverterFixed should", () => {
 			CriteriaMother.withOneFilterSorted("name", "EQUAL", "Javier", "id", "DESC"),
 		);
 
-		assert.deepEqual(actualQuery, {
+		expect(actualQuery).toStrictEqual({
 			query: "SELECT id, name FROM users WHERE name = ? ORDER BY ? ?;",
 			params: ["Javier", "id", "DESC"],
 		});
@@ -128,7 +125,7 @@ describe("CriteriaToMySqlConverterFixed should", () => {
 			}),
 		);
 
-		assert.deepEqual(actualQuery, {
+		expect(actualQuery).toStrictEqual({
 			query: "SELECT id, name, email FROM users WHERE name = ? AND email = ?;",
 			params: ["Javier", "javier@terra.es"],
 		});
@@ -158,7 +155,7 @@ describe("CriteriaToMySqlConverterFixed should", () => {
 			}),
 		);
 
-		assert.deepEqual(actualQuery, {
+		expect(actualQuery).toStrictEqual({
 			query: "SELECT id, name, email FROM users WHERE name = ? AND email = ? ORDER BY ? ?;",
 			params: ["Javier", "javier@terra.es", "id", "DESC"],
 		});
@@ -171,7 +168,7 @@ describe("CriteriaToMySqlConverterFixed should", () => {
 			CriteriaMother.withOneFilter("name", "CONTAINS", "Javier"),
 		);
 
-		assert.deepEqual(actualQuery, {
+		expect(actualQuery).toStrictEqual({
 			query: "SELECT id, name FROM users WHERE name LIKE ?;",
 			params: ["%Javier%"],
 		});
@@ -184,7 +181,7 @@ describe("CriteriaToMySqlConverterFixed should", () => {
 			CriteriaMother.withOneFilter("name", "NOT_CONTAINS", "Javier"),
 		);
 
-		assert.deepEqual(actualQuery, {
+		expect(actualQuery).toStrictEqual({
 			query: "SELECT id, name FROM users WHERE name NOT LIKE ?;",
 			params: ["%Javier%"],
 		});
@@ -197,7 +194,7 @@ describe("CriteriaToMySqlConverterFixed should", () => {
 			CriteriaMother.emptyPaginated(10, 3),
 		);
 
-		assert.deepEqual(actualQuery, {
+		expect(actualQuery).toStrictEqual({
 			query: "SELECT id, name FROM users LIMIT ? OFFSET ?;",
 			params: [10, 20],
 		});
@@ -210,7 +207,7 @@ describe("CriteriaToMySqlConverterFixed should", () => {
 			CriteriaMother.withOneFilter("name", "NOT_CONTAINS", "Javier"),
 		);
 
-		assert.deepEqual(actualQuery, {
+		expect(actualQuery).toStrictEqual({
 			query: "SELECT id, name FROM users WHERE name NOT LIKE ?;",
 			params: ["%Javier%"],
 		});
@@ -223,7 +220,7 @@ describe("CriteriaToMySqlConverterFixed should", () => {
 			CriteriaMother.withOneFilter("name", "NOT_EQUAL", "Javier"),
 		);
 
-		assert.deepEqual(actualQuery, {
+		expect(actualQuery).toStrictEqual({
 			query: "SELECT id, name FROM users WHERE name != ?;",
 			params: ["Javier"],
 		});
@@ -237,7 +234,7 @@ describe("CriteriaToMySqlConverterFixed should", () => {
 			{ fullname: "name" },
 		);
 
-		assert.deepEqual(actualQuery, {
+		expect(actualQuery).toStrictEqual({
 			query: "SELECT id, name FROM users WHERE name = ?;",
 			params: ["Javier"],
 		});
