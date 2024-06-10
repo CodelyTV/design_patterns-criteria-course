@@ -1,7 +1,7 @@
 import { createPool, Pool } from "mariadb";
 
 interface MinimalConn {
-	query: (sql: string) => Promise<unknown>;
+	query: (sql: string, params: (string | number)[]) => Promise<unknown>;
 	end: () => Promise<void>;
 }
 
@@ -21,11 +21,11 @@ export class MariaDBConnection {
 		return this.poolInstance;
 	}
 
-	async searchOne<T>(query: string): Promise<T | null> {
+	async searchOne<T>(query: string, params: (string | number)[] = []): Promise<T | null> {
 		let conn: MinimalConn | null = null;
 		try {
 			conn = (await this.pool.getConnection()) as MinimalConn;
-			const rows = (await conn.query(query)) as T[];
+			const rows = (await conn.query(query, params)) as T[];
 
 			return rows[0] ?? null;
 		} finally {
@@ -35,12 +35,12 @@ export class MariaDBConnection {
 		}
 	}
 
-	async searchAll<T>(query: string): Promise<T[]> {
+	async searchAll<T>(query: string, params: (string | number)[] = []): Promise<T[]> {
 		let conn: MinimalConn | null = null;
 		try {
 			conn = (await this.pool.getConnection()) as MinimalConn;
 
-			return (await conn.query(query)) as T[];
+			return (await conn.query(query, params)) as T[];
 		} finally {
 			if (conn) {
 				await conn.end();
@@ -48,11 +48,11 @@ export class MariaDBConnection {
 		}
 	}
 
-	async execute(query: string): Promise<void> {
+	async execute(query: string, params: (string | number)[] = []): Promise<void> {
 		let conn: MinimalConn | null = null;
 		try {
 			conn = (await this.pool.getConnection()) as MinimalConn;
-			await conn.query(query);
+			await conn.query(query, params);
 		} finally {
 			if (conn) {
 				await conn.end();
