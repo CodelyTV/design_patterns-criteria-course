@@ -1,0 +1,5 @@
+### Users with name containing John
+GET http://localhost:3000/api/users?filters[0][field]=name&filters[0][operator]=CONTAINS&filters[0][value]=John
+
+### All users
+GET http://localhost:3000/api/users?filters[0][field]=name&filters[0][operator]=EQUAL&filters[0][value]=John' OR '1'='1
