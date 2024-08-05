@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\User;
+use CodelyTv\Criteria\Eloquent\CriteriaToEloquentConverter;
 use CodelyTv\Criteria\FromLaravelRequest\CriteriaFromLaravelRequestConverter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -10,7 +11,7 @@ Route::get('/', function () {
 });
 
 Route::get('users', function (Request $request) {
-    $converter = new CriteriaFromLaravelRequestConverter();
+    $criteria = CriteriaFromLaravelRequestConverter::convert($request);
 
-    return $converter->toCriteria($request)->serialize();
+    return CriteriaToEloquentConverter::convert(User::query(), $criteria)->get();
 });
