@@ -14,14 +14,15 @@ use function Lambdish\Phunctional\map;
 
 abstract class ElasticsearchRepository
 {
-	public function __construct(private readonly ElasticsearchClient $client, private readonly CriteriaToElasticsearchConverter $converter) {}
+	public function __construct(private readonly ElasticsearchClient $client) {}
 
 	abstract protected function aggregateName(): string;
 
 	final public function searchByCriteria(Criteria $criteria): array
 	{
-		$query = $this->converter->convert($this->aggregateName(), $criteria);
+		$query = (new CriteriaToElasticsearchConverter())->convert($this->aggregateName(), $criteria);
 
+		var_dump($query);
 		return $this->searchRawElasticsearchQuery($query);
 	}
 

@@ -13,7 +13,7 @@ use Doctrine\ORM\EntityManager;
 
 final class MySqlBackofficeCourseRepository extends DoctrineRepository implements BackofficeCourseRepository
 {
-	public function __construct(EntityManager $entityManager, private readonly CriteriaToDoctrineConverter $converter)
+	public function __construct(EntityManager $entityManager)
 	{
 		parent::__construct($entityManager);
 	}
@@ -30,7 +30,7 @@ final class MySqlBackofficeCourseRepository extends DoctrineRepository implement
 
 	public function matching(Criteria $criteria): array
 	{
-		$doctrineCriteria = $this->converter->convert($criteria);
+		$doctrineCriteria = (new CriteriaToDoctrineConverter())->convert($criteria);
 
 		return $this->repository(BackofficeCourse::class)->matching($doctrineCriteria)->toArray();
 	}
