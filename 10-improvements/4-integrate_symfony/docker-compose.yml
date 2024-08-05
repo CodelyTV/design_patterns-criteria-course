@@ -1,0 +1,107 @@
+version: '3'
+
+services:
+  shared_rabbitmq:
+    container_name: codely-php_ddd_skeleton-rabbitmq
+    image: 'rabbitmq:3.10.5-management'
+    restart: unless-stopped
+    ports:
+      - "5630:5672"
+      - "8090:15672"
+    environment:
+      - RABBITMQ_DEFAULT_USER=codely
+      - RABBITMQ_DEFAULT_PASS=c0d3ly
+
+  shared_prometheus:
+    container_name: codely-php_ddd_skeleton-prometheus
+    image: prom/prometheus:v2.36.1
+    volumes:
+      - ./etc/prometheus/:/etc/prometheus/
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/usr/share/prometheus/console_libraries'
+      - '--web.console.templates=/usr/share/prometheus/consoles'
+    ports:
+      - "9999:9090"
+
+  mooc_mysql:
+    container_name: codely-php_ddd_skeleton-mooc-mysql
+    image: mariadb:10.7.4
+    ports:
+      - "3360:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+    healthcheck:
+      test: ["CMD", "mysqladmin", "--user=root", "--password=", "--host=127.0.0.1", "ping", "--silent"]
+      interval: 2s
+      timeout: 10s
+      retries: 10
+    command: ["--default-authentication-plugin=mysql_native_password"]
+
+  backoffice_elasticsearch:
+    container_name: codely-php_ddd_skeleton-backoffice-elastic
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.2.3
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+
+  backoffice_backend_php:
+    container_name: codely-php_ddd_skeleton-backoffice_backend-php
+    user: "${UID}:${GID}"
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - "8040:8040"
+      - "9040:9001"
+    volumes:
+      - .:/app:delegated
+    depends_on:
+      - shared_rabbitmq
+      - shared_prometheus
+      - backoffice_elasticsearch
+    command: symfony serve --dir=apps/backoffice/backend/public --port=8040
+
+  backoffice_frontend_php:
+    container_name: codely-php_ddd_skeleton-backoffice_frontend-php
+    user: "${UID}:${GID}"
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - "8041:8041"
+      - "9041:9001"
+    volumes:
+      - .:/app:delegated
+    depends_on:
+      - shared_rabbitmq
+      - shared_prometheus
+      - backoffice_elasticsearch
+      - mooc_mysql
+    command: symfony serve --dir=apps/backoffice/frontend/public --port=8041
+
+  mooc_backend_php:
+    container_name: codely-php_ddd_skeleton-mooc_backend-php
+    user: "${UID}:${GID}"
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - "8030:8030"
+      - "9030:9001"
+    volumes:
+      - .:/app:delegated
+    depends_on:
+      - shared_rabbitmq
+      - shared_prometheus
+      - mooc_mysql
+    command: symfony serve --dir=apps/mooc/backend/public --port=8030

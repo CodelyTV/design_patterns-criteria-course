@@ -1,0 +1,88 @@
+{
+  "name": "codelytv/php-ddd-example",
+  "license": "MIT",
+  "type": "project",
+  "description": "An example project applying Domain-Driven Design, Hexagonal Architecture and CQRS in a Monorepository",
+  "require": {
+    "php": "^8.3",
+
+    "ext-amqp": "*",
+    "ext-apcu": "*",
+    "ext-json": "*",
+    "ext-zend-opcache": "*",
+    "ext-pdo": "*",
+
+    "symfony/framework-bundle": "^7",
+    "symfony/messenger": "^7",
+    "symfony/dotenv": "^7",
+    "symfony/yaml": "^7",
+    "symfony/twig-bundle": "^7",
+    "symfony/validator": "^7",
+    "symfony/cache": "^7",
+
+    "lambdish/phunctional": "^2",
+
+    "ramsey/uuid": "^4",
+
+    "doctrine/dbal": "^3",
+    "doctrine/orm": "^2",
+
+    "ocramius/proxy-manager": "^2",
+    "laminas/laminas-zendframework-bridge": "^1",
+
+    "elasticsearch/elasticsearch": "^7",
+    "monolog/monolog": "^3",
+
+    "promphp/prometheus_client_php": "^2.7.2"
+  },
+  "require-dev": {
+    "ext-xdebug": "*",
+
+    "roave/security-advisories": "dev-master",
+
+    "behat/behat": "^3.13",
+    "friends-of-behat/mink-extension": "2.7.5",
+    "friends-of-behat/symfony-extension": "2.6.0",
+    "behat/mink-browserkit-driver": "2.2.0",
+
+    "phpunit/phpunit": "^9",
+    "mockery/mockery": "^1",
+
+    "fakerphp/faker": "^1",
+
+    "symfony/error-handler": "^7",
+
+    "symplify/easy-coding-standard": "^12.0",
+    "vimeo/psalm": "^5.15",
+    "rector/rector": "^0.18.12",
+    "psalm/plugin-mockery": "^1.1",
+    "psalm/plugin-symfony": "^5.0",
+    "psalm/plugin-phpunit": "^0.18.4",
+    "phpstan/phpstan": "^1.10",
+    "phpat/phpat": "^0.10.10",
+    "phpmd/phpmd": "^2.14",
+    "codelytv/coding-style": "^1.1"
+  },
+  "autoload": {
+    "psr-4": {
+      "CodelyTv\\Apps\\Mooc\\Backend\\": "apps/mooc/backend/src",
+      "CodelyTv\\Apps\\Mooc\\Frontend\\": "apps/mooc/frontend/src",
+
+      "CodelyTv\\Apps\\Backoffice\\Backend\\": "apps/backoffice/backend/src",
+      "CodelyTv\\Apps\\Backoffice\\Frontend\\": "apps/backoffice/frontend/src",
+
+      "CodelyTv\\": ["src"]
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "CodelyTv\\Tests\\": ["tests"]
+    }
+  },
+  "minimum-stability": "RC",
+  "config": {
+    "allow-plugins": {
+      "ocramius/package-versions": true
+    }
+  }
+}
