@@ -1,0 +1,2 @@
+up:
+	@./artisan serve
