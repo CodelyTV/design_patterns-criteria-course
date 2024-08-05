@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace CodelyTv\Mooc\Videos\Infrastructure\Persistence;
 
+use CodelyTv\Criteria\Criteria;
+use CodelyTv\Criteria\Doctrine\CriteriaToDoctrineConverter;
 use CodelyTv\Mooc\Videos\Domain\Video;
 use CodelyTv\Mooc\Videos\Domain\VideoId;
 use CodelyTv\Mooc\Videos\Domain\VideoRepository;
 use CodelyTv\Mooc\Videos\Domain\Videos;
-use CodelyTv\Shared\Domain\Criteria\Criteria;
-use CodelyTv\Shared\Infrastructure\Persistence\Doctrine\DoctrineCriteriaConverter;
 use CodelyTv\Shared\Infrastructure\Persistence\Doctrine\DoctrineRepository;
 
 final class VideoRepositoryMySql extends DoctrineRepository implements VideoRepository
@@ -34,7 +34,9 @@ final class VideoRepositoryMySql extends DoctrineRepository implements VideoRepo
 
 	public function searchByCriteria(Criteria $criteria): Videos
 	{
-		$doctrineCriteria = DoctrineCriteriaConverter::convert($criteria, self::$criteriaToDoctrineFields);
+		$converter = new CriteriaToDoctrineConverter(self::$criteriaToDoctrineFields);
+		$doctrineCriteria = $converter->convert($criteria);
+
 		$videos = $this->repository(Video::class)->matching($doctrineCriteria)->toArray();
 
 		return new Videos($videos);

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1384ca0a67984f7a0296f15a4373fed1",
+    "content-hash": "528bb2df93d981969bf447d88920b7f3",
     "packages": [
         {
             "name": "brick/math",
@@ -65,6 +65,180 @@
                 }
             ],
             "time": "2023-11-29T23:19:16+00:00"
+        },
+        {
+            "name": "codelytv/criteria",
+            "version": "0.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/CodelyTV/php-criteria-criteria.git",
+                "reference": "dec1fb5f7f8f3d6b8593343f6d1aa9e5a21fce07"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/CodelyTV/php-criteria-criteria/zipball/dec1fb5f7f8f3d6b8593343f6d1aa9e5a21fce07",
+                "reference": "dec1fb5f7f8f3d6b8593343f6d1aa9e5a21fce07",
+                "shasum": ""
+            },
+            "require": {
+                "lambdish/phunctional": "^2.1",
+                "php": "^8.2"
+            },
+            "require-dev": {
+                "codelytv/coding-style": "^1.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "CodelyTv\\Criteria\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "support": {
+                "issues": "https://github.com/CodelyTV/php-criteria-criteria/issues",
+                "source": "https://github.com/CodelyTV/php-criteria-criteria/tree/0.1.1"
+            },
+            "time": "2024-08-05T20:07:19+00:00"
+        },
+        {
+            "name": "codelytv/criteria-from-symfony-request",
+            "version": "0.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/CodelyTV/php-criteria-from_symfony_request.git",
+                "reference": "14656d030db1d7a4a1d7e27fdd41bcb372984b0e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/CodelyTV/php-criteria-from_symfony_request/zipball/14656d030db1d7a4a1d7e27fdd41bcb372984b0e",
+                "reference": "14656d030db1d7a4a1d7e27fdd41bcb372984b0e",
+                "shasum": ""
+            },
+            "require": {
+                "codelytv/criteria": "^0.1.1",
+                "codelytv/criteria-from-url": "^0.1.1",
+                "php": "^8.2",
+                "symfony/http-foundation": "^v7"
+            },
+            "require-dev": {
+                "codelytv/coding-style": "^1.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "CodelyTv\\Criteria\\FromSymfonyRequest\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "support": {
+                "issues": "https://github.com/CodelyTV/php-criteria-from_symfony_request/issues",
+                "source": "https://github.com/CodelyTV/php-criteria-from_symfony_request/tree/0.1.1"
+            },
+            "time": "2024-08-05T20:33:28+00:00"
+        },
+        {
+            "name": "codelytv/criteria-from-url",
+            "version": "0.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/CodelyTV/php-criteria-from_url.git",
+                "reference": "e2adeecce265f22afc5eb41fb760f765e1a9d532"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/CodelyTV/php-criteria-from_url/zipball/e2adeecce265f22afc5eb41fb760f765e1a9d532",
+                "reference": "e2adeecce265f22afc5eb41fb760f765e1a9d532",
+                "shasum": ""
+            },
+            "require": {
+                "codelytv/criteria": "^0.1.1",
+                "php": "^8.2"
+            },
+            "require-dev": {
+                "codelytv/coding-style": "^1.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "CodelyTv\\Criteria\\FromUrl\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "support": {
+                "issues": "https://github.com/CodelyTV/php-criteria-from_url/issues",
+                "source": "https://github.com/CodelyTV/php-criteria-from_url/tree/0.1.1"
+            },
+            "time": "2024-08-05T20:33:27+00:00"
+        },
+        {
+            "name": "codelytv/criteria-to-doctrine",
+            "version": "0.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/CodelyTV/php-criteria-to_doctrine.git",
+                "reference": "dd6afa429a741e55ed2f0069d2fdc5ab01fae56f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/CodelyTV/php-criteria-to_doctrine/zipball/dd6afa429a741e55ed2f0069d2fdc5ab01fae56f",
+                "reference": "dd6afa429a741e55ed2f0069d2fdc5ab01fae56f",
+                "shasum": ""
+            },
+            "require": {
+                "codelytv/criteria": "^0.1.1",
+                "doctrine/orm": "^3",
+                "php": "^8.2"
+            },
+            "require-dev": {
+                "codelytv/criteria-test-mother": "^0.1.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "CodelyTv\\Criteria\\Doctrine\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "support": {
+                "issues": "https://github.com/CodelyTV/php-criteria-to_doctrine/issues",
+                "source": "https://github.com/CodelyTV/php-criteria-to_doctrine/tree/0.1.1"
+            },
+            "time": "2024-08-05T20:33:29+00:00"
+        },
+        {
+            "name": "codelytv/criteria-to-elasticsearch",
+            "version": "0.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/CodelyTV/php-criteria-to_elasticsearch.git",
+                "reference": "def5ad2d08deb1f46b9ea60b0562433d4ef0beda"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/CodelyTV/php-criteria-to_elasticsearch/zipball/def5ad2d08deb1f46b9ea60b0562433d4ef0beda",
+                "reference": "def5ad2d08deb1f46b9ea60b0562433d4ef0beda",
+                "shasum": ""
+            },
+            "require": {
+                "codelytv/criteria": "^0.1.1",
+                "php": "^8.2"
+            },
+            "require-dev": {
+                "codelytv/criteria-test-mother": "^0.1.1",
+                "phpunit/phpunit": "^11.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "CodelyTv\\Criteria\\Elasticsearch\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "support": {
+                "issues": "https://github.com/CodelyTV/php-criteria-to_elasticsearch/issues",
+                "source": "https://github.com/CodelyTV/php-criteria-to_elasticsearch/tree/0.1.1"
+            },
+            "time": "2024-08-05T20:33:31+00:00"
         },
         {
             "name": "doctrine/cache",
@@ -244,97 +418,6 @@
                 }
             ],
             "time": "2024-04-18T06:56:21+00:00"
-        },
-        {
-            "name": "doctrine/common",
-            "version": "3.4.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/doctrine/common.git",
-                "reference": "0aad4b7ab7ce8c6602dfbb1e1a24581275fb9d1a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/common/zipball/0aad4b7ab7ce8c6602dfbb1e1a24581275fb9d1a",
-                "reference": "0aad4b7ab7ce8c6602dfbb1e1a24581275fb9d1a",
-                "shasum": ""
-            },
-            "require": {
-                "doctrine/persistence": "^2.0 || ^3.0",
-                "php": "^7.1 || ^8.0"
-            },
-            "require-dev": {
-                "doctrine/coding-standard": "^9.0 || ^10.0",
-                "doctrine/collections": "^1",
-                "phpstan/phpstan": "^1.4.1",
-                "phpstan/phpstan-phpunit": "^1",
-                "phpunit/phpunit": "^7.5.20 || ^8.5 || ^9.0",
-                "squizlabs/php_codesniffer": "^3.0",
-                "symfony/phpunit-bridge": "^6.1",
-                "vimeo/psalm": "^4.4"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Doctrine\\Common\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Guilherme Blanco",
-                    "email": "guilhermeblanco@gmail.com"
-                },
-                {
-                    "name": "Roman Borschel",
-                    "email": "roman@code-factory.org"
-                },
-                {
-                    "name": "Benjamin Eberlei",
-                    "email": "kontakt@beberlei.de"
-                },
-                {
-                    "name": "Jonathan Wage",
-                    "email": "jonwage@gmail.com"
-                },
-                {
-                    "name": "Johannes Schmitt",
-                    "email": "schmittjoh@gmail.com"
-                },
-                {
-                    "name": "Marco Pivetta",
-                    "email": "ocramius@gmail.com"
-                }
-            ],
-            "description": "PHP Doctrine Common project is a library that provides additional functionality that other Doctrine projects depend on such as better reflection support, proxies and much more.",
-            "homepage": "https://www.doctrine-project.org/projects/common.html",
-            "keywords": [
-                "common",
-                "doctrine",
-                "php"
-            ],
-            "support": {
-                "issues": "https://github.com/doctrine/common/issues",
-                "source": "https://github.com/doctrine/common/tree/3.4.4"
-            },
-            "funding": [
-                {
-                    "url": "https://www.doctrine-project.org/sponsorship.html",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://www.patreon.com/phpdoctrine",
-                    "type": "patreon"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/doctrine%2Fcommon",
-                    "type": "tidelift"
-                }
-            ],
-            "time": "2024-04-16T13:35:33+00:00"
         },
         {
             "name": "doctrine/dbal",
@@ -827,61 +910,48 @@
         },
         {
             "name": "doctrine/orm",
-            "version": "2.19.6",
+            "version": "3.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/orm.git",
-                "reference": "c1bb2ccf4b19c845f91ff7c4c01dc7cbba7f4073"
+                "reference": "722cea6536775206e81744542b36fa7c9a4ea3e5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/orm/zipball/c1bb2ccf4b19c845f91ff7c4c01dc7cbba7f4073",
-                "reference": "c1bb2ccf4b19c845f91ff7c4c01dc7cbba7f4073",
+                "url": "https://api.github.com/repos/doctrine/orm/zipball/722cea6536775206e81744542b36fa7c9a4ea3e5",
+                "reference": "722cea6536775206e81744542b36fa7c9a4ea3e5",
                 "shasum": ""
             },
             "require": {
                 "composer-runtime-api": "^2",
-                "doctrine/cache": "^1.12.1 || ^2.1.1",
-                "doctrine/collections": "^1.5 || ^2.1",
-                "doctrine/common": "^3.0.3",
-                "doctrine/dbal": "^2.13.1 || ^3.2",
+                "doctrine/collections": "^2.2",
+                "doctrine/dbal": "^3.8.2 || ^4",
                 "doctrine/deprecations": "^0.5.3 || ^1",
                 "doctrine/event-manager": "^1.2 || ^2",
                 "doctrine/inflector": "^1.4 || ^2.0",
                 "doctrine/instantiator": "^1.3 || ^2",
-                "doctrine/lexer": "^2 || ^3",
-                "doctrine/persistence": "^2.4 || ^3",
+                "doctrine/lexer": "^3",
+                "doctrine/persistence": "^3.3.1",
                 "ext-ctype": "*",
-                "php": "^7.1 || ^8.0",
+                "php": "^8.1",
                 "psr/cache": "^1 || ^2 || ^3",
-                "symfony/console": "^4.2 || ^5.0 || ^6.0 || ^7.0",
-                "symfony/polyfill-php72": "^1.23",
-                "symfony/polyfill-php80": "^1.16"
-            },
-            "conflict": {
-                "doctrine/annotations": "<1.13 || >= 3.0"
+                "symfony/console": "^5.4 || ^6.0 || ^7.0",
+                "symfony/var-exporter": "^6.3.9 || ^7.0"
             },
             "require-dev": {
-                "doctrine/annotations": "^1.13 || ^2",
-                "doctrine/coding-standard": "^9.0.2 || ^12.0",
-                "phpbench/phpbench": "^0.16.10 || ^1.0",
-                "phpstan/phpstan": "~1.4.10 || 1.11.1",
-                "phpunit/phpunit": "^7.5 || ^8.5 || ^9.6",
+                "doctrine/coding-standard": "^12.0",
+                "phpbench/phpbench": "^1.0",
+                "phpstan/phpstan": "1.11.1",
+                "phpunit/phpunit": "^10.4.0",
                 "psr/log": "^1 || ^2 || ^3",
                 "squizlabs/php_codesniffer": "3.7.2",
-                "symfony/cache": "^4.4 || ^5.4 || ^6.4 || ^7.0",
-                "symfony/var-exporter": "^4.4 || ^5.4 || ^6.2 || ^7.0",
-                "symfony/yaml": "^3.4 || ^4.0 || ^5.0 || ^6.0 || ^7.0",
-                "vimeo/psalm": "4.30.0 || 5.24.0"
+                "symfony/cache": "^5.4 || ^6.2 || ^7.0",
+                "vimeo/psalm": "5.24.0"
             },
             "suggest": {
                 "ext-dom": "Provides support for XSD validation for XML mapping files",
-                "symfony/cache": "Provides cache support for Setup Tool with doctrine/cache 2.0",
-                "symfony/yaml": "If you want to use YAML Metadata Mapping Driver"
+                "symfony/cache": "Provides cache support for Setup Tool with doctrine/cache 2.0"
             },
-            "bin": [
-                "bin/doctrine"
-            ],
             "type": "library",
             "autoload": {
                 "psr-4": {
@@ -922,9 +992,9 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/orm/issues",
-                "source": "https://github.com/doctrine/orm/tree/2.19.6"
+                "source": "https://github.com/doctrine/orm/tree/3.2.1"
             },
-            "time": "2024-06-26T17:24:40+00:00"
+            "time": "2024-06-26T21:48:58+00:00"
         },
         {
             "name": "doctrine/persistence",
@@ -3875,79 +3945,6 @@
             "time": "2024-06-19T12:30:46+00:00"
         },
         {
-            "name": "symfony/polyfill-php72",
-            "version": "v1.30.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/polyfill-php72.git",
-                "reference": "10112722600777e02d2745716b70c5db4ca70442"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-php72/zipball/10112722600777e02d2745716b70c5db4ca70442",
-                "reference": "10112722600777e02d2745716b70c5db4ca70442",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.1"
-            },
-            "type": "library",
-            "extra": {
-                "thanks": {
-                    "name": "symfony/polyfill",
-                    "url": "https://github.com/symfony/polyfill"
-                }
-            },
-            "autoload": {
-                "files": [
-                    "bootstrap.php"
-                ],
-                "psr-4": {
-                    "Symfony\\Polyfill\\Php72\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Nicolas Grekas",
-                    "email": "p@tchwork.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
-                }
-            ],
-            "description": "Symfony polyfill backporting some PHP 7.2+ features to lower PHP versions",
-            "homepage": "https://symfony.com",
-            "keywords": [
-                "compatibility",
-                "polyfill",
-                "portable",
-                "shim"
-            ],
-            "support": {
-                "source": "https://github.com/symfony/polyfill-php72/tree/v1.30.0"
-            },
-            "funding": [
-                {
-                    "url": "https://symfony.com/sponsor",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/fabpot",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                    "type": "tidelift"
-                }
-            ],
-            "time": "2024-06-19T12:30:46+00:00"
-        },
-        {
             "name": "symfony/polyfill-php80",
             "version": "v1.30.0",
             "source": {
@@ -5634,6 +5631,41 @@
                 }
             ],
             "time": "2024-08-05T14:17:14+00:00"
+        },
+        {
+            "name": "codelytv/criteria-test-mother",
+            "version": "0.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/CodelyTV/php-criteria-test_mother.git",
+                "reference": "784600f0435a97a9dcc11c878510ca9ee0f5fa47"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/CodelyTV/php-criteria-test_mother/zipball/784600f0435a97a9dcc11c878510ca9ee0f5fa47",
+                "reference": "784600f0435a97a9dcc11c878510ca9ee0f5fa47",
+                "shasum": ""
+            },
+            "require": {
+                "codelytv/criteria": "^0.1.1",
+                "php": "^8.2"
+            },
+            "require-dev": {
+                "codelytv/coding-style": "^1.3",
+                "fakerphp/faker": "^1.23"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "CodelyTv\\Criteria\\Mother\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "support": {
+                "issues": "https://github.com/CodelyTV/php-criteria-test_mother/issues",
+                "source": "https://github.com/CodelyTV/php-criteria-test_mother/tree/0.1.1"
+            },
+            "time": "2024-08-05T20:33:30+00:00"
         },
         {
             "name": "composer/package-versions-deprecated",

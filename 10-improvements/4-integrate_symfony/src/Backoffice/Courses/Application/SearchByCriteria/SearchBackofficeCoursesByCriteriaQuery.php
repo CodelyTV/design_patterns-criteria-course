@@ -12,8 +12,8 @@ final readonly class SearchBackofficeCoursesByCriteriaQuery implements Query
 		private array $filters,
 		private ?string $orderBy,
 		private ?string $order,
-		private ?int $limit,
-		private ?int $offset
+		private ?int $pageSize,
+		private ?int $pageNumber
 	) {}
 
 	public function filters(): array
@@ -31,13 +31,13 @@ final readonly class SearchBackofficeCoursesByCriteriaQuery implements Query
 		return $this->order;
 	}
 
-	public function limit(): ?int
+	public function pageSize(): ?int
 	{
-		return $this->limit;
+		return $this->pageSize;
 	}
 
-	public function offset(): ?int
+	public function pageNumber(): ?int
 	{
-		return $this->offset;
+		return $this->pageNumber;
 	}
 }

@@ -6,7 +6,7 @@ namespace CodelyTv\Backoffice\Courses\Infrastructure\Persistence;
 
 use CodelyTv\Backoffice\Courses\Domain\BackofficeCourse;
 use CodelyTv\Backoffice\Courses\Domain\BackofficeCourseRepository;
-use CodelyTv\Shared\Domain\Criteria\Criteria;
+use CodelyTv\Criteria\Criteria;
 use CodelyTv\Shared\Infrastructure\Persistence\Elasticsearch\ElasticsearchRepository;
 
 use function Lambdish\Phunctional\map;

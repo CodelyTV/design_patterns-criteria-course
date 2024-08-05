@@ -8,9 +8,7 @@ use CodelyTv\Backoffice\Courses\Application\BackofficeCourseResponse;
 use CodelyTv\Backoffice\Courses\Application\BackofficeCoursesResponse;
 use CodelyTv\Backoffice\Courses\Domain\BackofficeCourse;
 use CodelyTv\Backoffice\Courses\Domain\BackofficeCourseRepository;
-use CodelyTv\Shared\Domain\Criteria\Criteria;
-use CodelyTv\Shared\Domain\Criteria\Filters;
-use CodelyTv\Shared\Domain\Criteria\Order;
+use CodelyTv\Criteria\Criteria;
 
 use function Lambdish\Phunctional\map;
 
@@ -18,9 +16,14 @@ final readonly class BackofficeCoursesByCriteriaSearcher
 {
 	public function __construct(private BackofficeCourseRepository $repository) {}
 
-	public function search(Filters $filters, Order $order, ?int $limit, ?int $offset): BackofficeCoursesResponse
-	{
-		$criteria = new Criteria($filters, $order, $offset, $limit);
+	public function search(
+		array $filters,
+		?string $orderBy,
+		?string $orderType,
+		?int $pageSize,
+		?int $pageNumber
+	): BackofficeCoursesResponse {
+		$criteria = Criteria::fromPrimitives($filters, $orderBy, $orderType, $pageSize, $pageNumber);
 
 		return new BackofficeCoursesResponse(...map($this->toResponse(), $this->repository->matching($criteria)));
 	}

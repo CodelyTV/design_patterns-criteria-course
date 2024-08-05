@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace CodelyTv\Tests\Backoffice\Courses\Domain;
 
-use CodelyTv\Shared\Domain\Criteria\Criteria;
-use CodelyTv\Tests\Shared\Domain\Criteria\CriteriaMother;
-use CodelyTv\Tests\Shared\Domain\Criteria\FilterMother;
-use CodelyTv\Tests\Shared\Domain\Criteria\FiltersMother;
+use CodelyTv\Criteria\Criteria;
+use CodelyTv\Criteria\Mother\CriteriaMother;
+use CodelyTv\Criteria\Mother\FilterMother;
+use CodelyTv\Criteria\Mother\FiltersMother;
 
 final class BackofficeCourseCriteriaMother
 {
@@ -15,7 +15,7 @@ final class BackofficeCourseCriteriaMother
 	{
 		return CriteriaMother::create(
 			FiltersMother::createOne(
-				FilterMother::fromValues([
+				FilterMother::fromPrimitives([
 					'field' => 'name',
 					'operator' => 'CONTAINS',
 					'value' => $text,

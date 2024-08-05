@@ -6,12 +6,18 @@ namespace CodelyTv\Backoffice\Courses\Infrastructure\Persistence;
 
 use CodelyTv\Backoffice\Courses\Domain\BackofficeCourse;
 use CodelyTv\Backoffice\Courses\Domain\BackofficeCourseRepository;
-use CodelyTv\Shared\Domain\Criteria\Criteria;
-use CodelyTv\Shared\Infrastructure\Persistence\Doctrine\DoctrineCriteriaConverter;
+use CodelyTv\Criteria\Criteria;
+use CodelyTv\Criteria\Doctrine\CriteriaToDoctrineConverter;
 use CodelyTv\Shared\Infrastructure\Persistence\Doctrine\DoctrineRepository;
+use Doctrine\ORM\EntityManager;
 
 final class MySqlBackofficeCourseRepository extends DoctrineRepository implements BackofficeCourseRepository
 {
+	public function __construct(EntityManager $entityManager, private readonly CriteriaToDoctrineConverter $converter)
+	{
+		parent::__construct($entityManager);
+	}
+
 	public function save(BackofficeCourse $course): void
 	{
 		$this->persist($course);
@@ -24,7 +30,7 @@ final class MySqlBackofficeCourseRepository extends DoctrineRepository implement
 
 	public function matching(Criteria $criteria): array
 	{
-		$doctrineCriteria = DoctrineCriteriaConverter::convert($criteria);
+		$doctrineCriteria = $this->converter->convert($criteria);
 
 		return $this->repository(BackofficeCourse::class)->matching($doctrineCriteria)->toArray();
 	}

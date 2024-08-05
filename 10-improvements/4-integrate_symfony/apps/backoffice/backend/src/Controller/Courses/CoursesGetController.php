@@ -21,8 +21,8 @@ final readonly class CoursesGetController
 	{
 		$orderBy = $request->query->get('order_by');
 		$order = $request->query->get('order');
-		$limit = $request->query->get('limit');
-		$offset = $request->query->get('offset');
+		$pageSize = $request->query->get('pageSize');
+		$pageNumber = $request->query->get('pageNumber');
 
 		/** @var BackofficeCoursesResponse $response */
 		$response = $this->queryBus->ask(
@@ -30,8 +30,8 @@ final readonly class CoursesGetController
 				(array) $request->query->get('filters'),
 				$orderBy,
 				$order,
-				$limit === null ? null : (int) $limit,
-				$offset === null ? null : (int) $offset
+				$pageSize === null ? null : (int) $pageSize,
+				$pageNumber === null ? null : (int) $pageNumber
 			)
 		);
 

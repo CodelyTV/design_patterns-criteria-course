@@ -22,10 +22,15 @@
 
     "lambdish/phunctional": "^2",
 
+    "codelytv/criteria": "^0.1",
+    "codelytv/criteria-from-symfony-request": "^0.1",
+    "codelytv/criteria-to-doctrine": "^0.1",
+    "codelytv/criteria-to-elasticsearch": "^0.1",
+
     "ramsey/uuid": "^4",
 
     "doctrine/dbal": "^3",
-    "doctrine/orm": "^2",
+    "doctrine/orm": "^3",
 
     "ocramius/proxy-manager": "^2",
     "laminas/laminas-zendframework-bridge": "^1",
@@ -61,7 +66,8 @@
     "phpstan/phpstan": "^1.10",
     "phpat/phpat": "^0.10.10",
     "phpmd/phpmd": "^2.14",
-    "codelytv/coding-style": "^1.1"
+    "codelytv/coding-style": "^1.1",
+    "codelytv/criteria-test-mother": "^0.1.1"
   },
   "autoload": {
     "psr-4": {

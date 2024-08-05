@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace CodelyTv\Shared\Infrastructure\Persistence\Elasticsearch;
 
-use CodelyTv\Shared\Domain\Criteria\Criteria;
+use CodelyTv\Criteria\Criteria;
+use CodelyTv\Criteria\Elasticsearch\CriteriaToElasticsearchConverter;
 use CodelyTv\Shared\Infrastructure\Elasticsearch\ElasticsearchClient;
 use Elasticsearch\Common\Exceptions\Missing404Exception;
 
@@ -13,15 +14,13 @@ use function Lambdish\Phunctional\map;
 
 abstract class ElasticsearchRepository
 {
-	public function __construct(private readonly ElasticsearchClient $client) {}
+	public function __construct(private readonly ElasticsearchClient $client, private readonly CriteriaToElasticsearchConverter $converter) {}
 
 	abstract protected function aggregateName(): string;
 
 	final public function searchByCriteria(Criteria $criteria): array
 	{
-		$converter = new ElasticsearchCriteriaConverter();
-
-		$query = $converter->convert($criteria);
+		$query = $this->converter->convert($this->aggregateName(), $criteria);
 
 		return $this->searchRawElasticsearchQuery($query);
 	}

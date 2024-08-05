@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace CodelyTv\Backoffice\Courses\Domain;
 
-use CodelyTv\Shared\Domain\Criteria\Criteria;
+use CodelyTv\Criteria\Criteria;
 
 interface BackofficeCourseRepository
 {
