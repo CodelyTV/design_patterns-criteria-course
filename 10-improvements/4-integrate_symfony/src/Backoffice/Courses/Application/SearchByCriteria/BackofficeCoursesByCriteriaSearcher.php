@@ -25,7 +25,9 @@ final readonly class BackofficeCoursesByCriteriaSearcher
 	): BackofficeCoursesResponse {
 		$criteria = Criteria::fromPrimitives($filters, $orderBy, $orderType, $pageSize, $pageNumber);
 
-		return new BackofficeCoursesResponse(...map($this->toResponse(), $this->repository->matching($criteria)));
+		$courses = $this->repository->matching($criteria);
+
+		return new BackofficeCoursesResponse(...map($this->toResponse(), $courses));
 	}
 
 	private function toResponse(): callable
