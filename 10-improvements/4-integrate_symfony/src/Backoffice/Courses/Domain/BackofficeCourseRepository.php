@@ -12,5 +12,6 @@ interface BackofficeCourseRepository
 
 	public function searchAll(): array;
 
+	/** @return BackofficeCourse[] */
 	public function matching(Criteria $criteria): array;
 }
