@@ -22,7 +22,6 @@ abstract class ElasticsearchRepository
 	{
 		$query = (new CriteriaToElasticsearchConverter())->convert($this->aggregateName(), $criteria);
 
-		var_dump($query);
 		return $this->searchRawElasticsearchQuery($query);
 	}
 
